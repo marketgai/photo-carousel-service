@@ -1,17 +1,18 @@
 {
-  "name": "",
+  "name": "photo-carousel",
   "version": "",
-  "description": "",
-  "author": "",
+  "description": "photo carousel gallery for a listing",
+  "author": "Timothy Akana",
   "license": "",
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {
-  },
-  "dependencies": {
-  },
+  "scripts": {},
+  "dependencies": {},
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "express": "^4.17.1",
+    "faker": "^5.1.0",
+    "mongoose": "^5.10.13"
   }
 }

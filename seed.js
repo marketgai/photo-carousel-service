@@ -1,4 +1,5 @@
 const faker = require('faker');
+const db = require('./db/connection.js');
 
 const images = [
   'photo-1603825394551-2e7eaace6a2a.jpg',
@@ -192,3 +193,12 @@ const seedData = () => {
   });
   return seedDataObject;
 };
+
+const dummyData = seedData();
+db.insertMany(dummyData, (error, documents) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('documents added to database');
+  }
+});
