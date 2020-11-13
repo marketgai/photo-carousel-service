@@ -8,7 +8,7 @@ db.once('open', () => console.log('connected to mongoose!'));
 
 const photoCarouselSchema = new mongoose.Schema({
   id: {
-    type: String,
+    type: Number,
     unique: true
   },
   listingId: Number,

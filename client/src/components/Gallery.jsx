@@ -1,10 +1,11 @@
 import React from 'react';
+import Image from './Image.jsx';
 
 const Gallery = ({carouselPhotos}) => {
   return (
     <div>
-      {carouselPhotos.map(photo => {
-        return <img src={photo.photo}></img>;
+      {carouselPhotos.map(image => {
+        return <Image key={image.id} image={image} />;
       })}
     </div>
   );
