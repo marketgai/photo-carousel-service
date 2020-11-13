@@ -18,11 +18,8 @@ const photoCarouselSchema = new mongoose.Schema({
 
 const userFavoritesSchema = new mongoose.Schema({
   userId: Number,
-  favorites: {
-    listName: String,
-    isFavorite: Boolean,
-    favListings: []
-  }
+  listName: String,
+  favoriteLists: []
 });
 
 const PhotoCarousel = mongoose.model('photoCarousel', photoCarouselSchema);
