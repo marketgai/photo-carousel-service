@@ -4,9 +4,9 @@ const db = require('../db/connection.js');
 const seedData = generateSeedData();
 
 //Drop current collection if present
-db.collection.drop();
+db.PhotoCarousel.collection.drop();
 //Populate database
-db.insertMany(seedData, (error, documents) => {
+db.PhotoCarousel.insertMany(seedData, (error, documents) => {
   if (error) {
     console.log(error);
   } else {

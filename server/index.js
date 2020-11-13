@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 app.get('/api/photo-carousel/:id', (req, res) => {
   console.log('received GET request');
-  db.find({listingId: req.params.id}, (err, results) => {
+  db.PhotoCarousel.find({listingId: req.params.id}, (err, results) => {
     if (err) {
       res.statusCode(404);
       res.end();
