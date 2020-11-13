@@ -1,5 +1,4 @@
 const faker = require('faker');
-const db = require('./db/connection.js');
 
 const images = [
   'photo-1603825394551-2e7eaace6a2a.jpg',
@@ -170,20 +169,17 @@ const generateListingIds = () => {
   return [...Array(100).keys()];
 };
 
-const seedData = () => {
+const generateSeedData = () => {
   const seedDataObject = [];
-  let id = 1;
-  //Will need to replace this with group-agreed upon list of 100 product ids
-  const listingIds = generateListingIds();
+  let id = 0;
+  const listingIds = generateListingIds(); //TODO: update this when group agrees upon listing id format
   listingIds.forEach((listingId) => {
-    //generate random number for the number of pictures associated to the listing
     let numPictures = generateRandomNumberBetween(5, 15);
     while (numPictures > 0) {
       let listingEntry = {
         id: id,
         listingId: listingId,
-        // TODO: Add a method to prevent getting duplicate images into the same listing
-        photo: getRandomImage(),
+        photo: getRandomImage(), // TODO: Add a method to prevent getting duplicate images into the same listing
         description: getRandomDescription()
       };
       seedDataObject.push(listingEntry);
@@ -194,11 +190,4 @@ const seedData = () => {
   return seedDataObject;
 };
 
-const dummyData = seedData();
-db.insertMany(dummyData, (error, documents) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('documents added to database');
-  }
-});
+module.exports = generateSeedData;
