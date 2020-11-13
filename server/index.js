@@ -4,8 +4,7 @@ const db = require('../db/connection.js');
 const PORT = 3001;
 const app = express();
 
-//To be used once I create static files
-// app.use(express.static('public'));
+app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.get('/api/photo-carousel/:id', (req, res) => {
