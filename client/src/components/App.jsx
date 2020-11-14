@@ -18,7 +18,6 @@ class App extends React.Component {
   loadListingPhotos(id) {
     axios.get(`/api/photo-carousel/${id}`)
       .then(results => {
-        console.log(results.data);
         this.setState({
           carouselPhotos: results.data
         });
@@ -30,7 +29,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>Tim's Photo Carousel</h1>
+        <button>FAVORITES</button>
         <Gallery carouselPhotos={this.state.carouselPhotos} />
+        <button>Show All Photos</button>
       </div>
     );
   }
