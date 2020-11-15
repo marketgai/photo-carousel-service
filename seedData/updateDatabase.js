@@ -15,6 +15,7 @@ db.PhotoCarousel.insertMany(seedListings, (error, documents) => {
   }
 });
 
+//Drop current collection if present
 db.UserFavorite.collection.drop();
 //Populate database
 db.UserFavorite.insertMany(seedFavorites, (error, documents) => {

@@ -13,8 +13,11 @@
     "seed-data": "node seedData/updateDatabase.js",
     "test": "jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "styled-components": "^5.2.1"
+  },
   "devDependencies": {
+    "axios": "^0.21.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",

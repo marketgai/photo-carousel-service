@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import Gallery from './Gallery.jsx';
 import axios from 'axios';
 
@@ -23,7 +24,7 @@ class App extends React.Component {
         });
       })
       .catch(error => console.log(error));
-  }
+  };
 
   render() {
     return (
