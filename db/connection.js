@@ -8,7 +8,7 @@ db.once('open', () => console.log('connected to mongoose!'));
 
 const photoCarouselSchema = new mongoose.Schema({
   id: {
-    type: String,
+    type: Number,
     unique: true
   },
   listingId: Number,
@@ -16,6 +16,14 @@ const photoCarouselSchema = new mongoose.Schema({
   description: String
 });
 
-const PhotoCarousel = mongoose.model('photoCarousel', photoCarouselSchema);
+const userFavoritesSchema = new mongoose.Schema({
+  userId: Number,
+  listName: String,
+  favoriteLists: Array
+});
 
-module.exports = PhotoCarousel;
+const PhotoCarousel = mongoose.model('photoCarousel', photoCarouselSchema);
+const UserFavorite = mongoose.model('userFavorites', userFavoritesSchema);
+
+module.exports.PhotoCarousel = PhotoCarousel;
+module.exports.UserFavorite = UserFavorite;

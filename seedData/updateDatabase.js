@@ -1,12 +1,24 @@
-const generateSeedData = require('./seed.js');
+const seed = require('./seed.js');
 const db = require('../db/connection.js');
 
-const seedData = generateSeedData();
+const seedListings = seed.generateSeedData();
+const seedFavorites = seed.generateFavoriteListings();
 
 //Drop current collection if present
-db.collection.drop();
+db.PhotoCarousel.collection.drop();
 //Populate database
-db.insertMany(seedData, (error, documents) => {
+db.PhotoCarousel.insertMany(seedListings, (error, documents) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('documents added to database');
+  }
+});
+
+//Drop current collection if present
+db.UserFavorite.collection.drop();
+//Populate database
+db.UserFavorite.insertMany(seedFavorites, (error, documents) => {
   if (error) {
     console.log(error);
   } else {

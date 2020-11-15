@@ -165,8 +165,22 @@ const getRandomDescription = () => {
   return faker.lorem.sentence();
 };
 
+const getRandomState = () => {
+  return faker.address.state();
+};
+
 const generateListingIds = () => {
   return [...Array(100).keys()];
+};
+
+const getRandomFavorites = () => {
+  let favorites = [];
+  let numberOfFavorites = generateRandomNumberBetween(3, 8);
+  while (numberOfFavorites > 0) {
+    favorites.push(generateRandomNumberBetween(0, 100));
+    numberOfFavorites--;
+  }
+  return favorites;
 };
 
 const generateSeedData = () => {
@@ -190,4 +204,24 @@ const generateSeedData = () => {
   return seedDataObject;
 };
 
-module.exports = generateSeedData;
+const users = [1, 2, 3, 4, 5];
+const generateFavoriteListings = () => {
+  const seedDataFavorites = [];
+  users.forEach((user) => {
+    let userFavorites = {
+      userId: user,
+      listName: getRandomState(),
+      favoriteLists: getRandomFavorites()
+    };
+    let secondFavorite = {
+      userId: user,
+      listName: getRandomState(),
+      favoriteLists: getRandomFavorites()
+    };
+    seedDataFavorites.push(userFavorites, secondFavorite);
+  });
+  return seedDataFavorites;
+};
+
+module.exports.generateSeedData = generateSeedData;
+module.exports.generateFavoriteListings = generateFavoriteListings;
