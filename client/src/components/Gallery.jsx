@@ -17,6 +17,11 @@ const Photo = styled.img`
   object-fit: cover;
   height: 100%;
   width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 80%;
+  }
 `;
 
 const MainPhoto = styled(Photo)`
