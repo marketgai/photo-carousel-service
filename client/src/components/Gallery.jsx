@@ -1,31 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import Image from './Image.jsx';
 
 const GalleryStyled = styled.div`
   display: grid;
   grid-template-rows: 50% 50%;
   grid-template-columns: 25% 25% 25% 25%;
-  background-color: gray;
   margin: auto;
   width: 80%;
-  max-width: 1200px;
-  min-width: 320px;
+  min-width: 500px;
   height: 100%;
-  min-height: 200px;
-  max-height: 500px;
+  min-height: 500px;
   grid-gap: 5px;
 `;
 
-const Gallery = ({carouselPhotos}) => {
-  //Implement a counter to only let a max of 8 pictures show up in the gallery.
+const Photo = styled.img`
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+`;
+
+const MainPhoto = styled(Photo)`
+  grid-area: 1 / 1 / 3 / 3;
+`;
+
+const Gallery = ({carouselPhotos, toggleCarousel}) => {
+  //Implement a counter to only let first 5 pictures for gallery.
   let photoCount = 0;
   return (
     <GalleryStyled>
+      {/* Main Photo has a larger Grid Area */}
+      {carouselPhotos[0] && <MainPhoto src={carouselPhotos[0].photo} onClick={toggleCarousel} id={0}></MainPhoto>}
+      {/* Include 4 more photos */}
       {carouselPhotos.map((image, index) => {
-        if (photoCount < 8) {
+        if (photoCount < 4 && index > 0) {
           photoCount++;
-          return <Image key={image.id} image={image} index={index} />;
+          return <Photo src={image.photo} key={image.id} id={index} onClick={toggleCarousel} />;
         }
        })}
     </GalleryStyled>

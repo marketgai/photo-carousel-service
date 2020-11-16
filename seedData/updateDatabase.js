@@ -9,7 +9,7 @@ db.PhotoCarousel.collection.drop();
 //Populate database
 db.PhotoCarousel.insertMany(seedListings, (error, documents) => {
   if (error) {
-    console.log(error);
+    console.error.bind(console, 'error adding to database')
   } else {
     console.log('documents added to database');
   }
@@ -20,7 +20,7 @@ db.UserFavorite.collection.drop();
 //Populate database
 db.UserFavorite.insertMany(seedFavorites, (error, documents) => {
   if (error) {
-    console.log(error);
+    console.error.bind(console, 'error adding to database')
   } else {
     console.log('documents added to database');
   }
