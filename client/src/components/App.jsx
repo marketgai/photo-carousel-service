@@ -51,9 +51,7 @@ class App extends React.Component {
 
   moveIndexRight(event) {
     event.preventDefault();
-    console.log(this.state.photoIndex);
     const rightIndex = parseInt(this.state.photoIndex) === this.state.carouselPhotos.length - 1 ? this.state.photoIndex : parseInt(this.state.photoIndex) + 1;
-    console.log(rightIndex);
     this.setState({
       photoIndex: rightIndex
     })

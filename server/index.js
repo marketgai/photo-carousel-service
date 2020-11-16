@@ -1,11 +1,15 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const database = require('../db/controller.js');
 const PORT = 3001;
+const APP = path.join(__dirname + '/../client/dist');
 const app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
+
+//app.use('/api/photo-carousel/:id', express.static(PATH));
 
 app.get('/api/photo-carousel/:id', database.getPhotos);
 

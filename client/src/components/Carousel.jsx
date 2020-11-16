@@ -1,15 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+const grow = keyframes`
+  0% {
+    height: 0px
+  }
+  100% {
+    height: 100%
+  }
+`
 
 const CarouselModal = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: absolute;
+  bottom: 0;
   z-index: 1;
   height: 100%;
   width: 100%;
   background-color: white;
+  animation: 200ms ${grow} ease-out;
 `;
 
 const FocusImage = styled.img`
@@ -39,14 +47,14 @@ const RightButton = styled(LeftButton)`
 const Carousel = ({carousel, toggleCarousel, moveIndexLeft, moveIndexRight}) => {
   return (
     <div>
-      <button onClick={toggleCarousel} >Press X to Close Modal</button>
-      <h2>Image {parseInt(carousel.photoIndex) + 1} / {carousel.carouselPhotos.length}</h2>
       <CarouselModal>
+        <button onClick={toggleCarousel} >Press X to Close Modal</button>
+        <h2>Image {parseInt(carousel.photoIndex) + 1} / {carousel.carouselPhotos.length}</h2>
         <LeftButton onClick={moveIndexLeft}></LeftButton>
-        <FocusImage src={carousel.carouselPhotos[carousel.photoIndex].photo}></FocusImage>
+        <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo}></FocusImage>
         <RightButton onClick={moveIndexRight} ></RightButton>
+        <p>{carousel.carouselPhotos[carousel.photoIndex].description}</p>
       </CarouselModal>
-      <p>{carousel.carouselPhotos[carousel.photoIndex].description}</p>
     </div>
   )
 }

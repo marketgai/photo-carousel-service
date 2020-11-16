@@ -25,7 +25,7 @@ const Photo = styled.img`
 `;
 
 const MainPhoto = styled(Photo)`
-  grid-area: 1 / 1 / 3 / 3;
+  grid-area: span 2 / span 2
 `;
 
 const Gallery = ({carouselPhotos, toggleCarousel}) => {
