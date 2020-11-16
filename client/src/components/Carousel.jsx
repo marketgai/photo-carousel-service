@@ -18,7 +18,7 @@ const Carousel = ({carousel, toggleCarousel, moveIndexLeft, moveIndexRight}) => 
   return (
     <CarouselModal>
       <button onClick={toggleCarousel} >Press X to Close Modal</button>
-      <h2>Image # X / Y</h2>
+      <h2>Image {parseInt(carousel.photoIndex) + 1} / {carousel.carouselPhotos.length}</h2>
       <button onClick={moveIndexLeft} >Scroll Picture Left</button>
       <FocusImage src={carousel.carouselPhotos[carousel.photoIndex].photo}></FocusImage>
       <button onClick={moveIndexRight} >Scroll Picture Right</button>
