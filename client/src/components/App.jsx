@@ -20,6 +20,7 @@ class App extends React.Component {
     this.moveIndexLeft = this.moveIndexLeft.bind(this);
     this.moveIndexRight = this.moveIndexRight.bind(this);
     this.toggleMosaic = this.toggleMosaic.bind(this);
+    this.switchCarouselMosaic = this.switchCarouselMosaic.bind(this);
   }
 
   componentDidMount() {
@@ -48,12 +49,13 @@ class App extends React.Component {
     });
   }
 
-  toggleMosaic(event) {
-    event.preventDefault();
+  toggleMosaic(index) {
+    console.log(index);
     const { showMosaic } = this.state;
     const mosaicToggle = !showMosaic;
     this.setState({
       showMosaic: mosaicToggle,
+      photoIndex: index,
     });
   }
 
@@ -76,16 +78,39 @@ class App extends React.Component {
     });
   }
 
+  switchCarouselMosaic(event) {
+    event.preventDefault();
+    console.log(event.target.id);
+    if (this.state.showCarousel) {
+      this.setState({
+        showCarousel: false,
+        showMosaic: true,
+      });
+    } else {
+      this.setState({
+        showCarousel: true,
+        showMosaic: false,
+        photoIndex: event.target.id,
+      });
+    }
+  }
+
   render() {
     const { showCarousel, carouselPhotos, showMosaic } = this.state;
     return (
       <div>
+        {showMosaic && <Mosaic
+          photoCarousel={carouselPhotos}
+          toggleMosaic={this.toggleMosaic}
+          switchCarouselMosaic={this.switchCarouselMosaic}
+        />}
         {showCarousel
         && <Carousel
           carousel={this.state}
           toggleCarousel={this.toggleCarousel}
           moveIndexLeft={this.moveIndexLeft}
           moveIndexRight={this.moveIndexRight}
+          switchCarouselMosaic={this.switchCarouselMosaic}
         />}
         <h1>Photo Carousel Component</h1>
         <button>FAVORITES</button>
@@ -96,7 +121,6 @@ class App extends React.Component {
           width={100}
         />
         <button onClick={this.toggleMosaic}>Show All Photos</button>
-        {showMosaic && <Mosaic photoCarousel={carouselPhotos} />}
       </div>
     );
   }

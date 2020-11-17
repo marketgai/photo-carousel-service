@@ -3,12 +3,12 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const Carousel = ({
-  carousel, toggleCarousel, moveIndexLeft, moveIndexRight,
+  carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic
 }) => (
   <CarouselModal>
     <TopLeftButtons>
       <CloseModuleButton onClick={toggleCarousel} />
-      <ShowAllPhotosButton onClick={() => console.log(test)} />
+      <ShowAllPhotosButton onClick={switchCarouselMosaic} />
     </TopLeftButtons>
     <TopRightButtons>
       <button onClick={() => console.log(test)} >Share</button>
