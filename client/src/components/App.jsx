@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-wrap-multilines */
+/* eslint-disable import/extensions */
 import React from 'react';
-import styled from 'styled-components';
+import axios from 'axios';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
-import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,46 +25,64 @@ class App extends React.Component {
 
   loadListingPhotos(id) {
     axios.get(`/api/photo-carousel/${id}`)
-      .then(results => {
+      .then((results) => {
         this.setState({
-          carouselPhotos: results.data
+          carouselPhotos: results.data,
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   toggleCarousel(event) {
     event.preventDefault();
-    const carouselToggle = !this.state.showCarousel
+    const { showCarousel } = this.state;
+    const carouselToggle = !showCarousel;
     this.setState({
       showCarousel: carouselToggle,
-      photoIndex: event.target.id
-    })
+      photoIndex: event.target.id,
+    });
   }
 
   moveIndexLeft(event) {
     event.preventDefault();
-    const leftIndex = this.state.photoIndex > 0 ? this.state.photoIndex - 1 : 0;
+    const { photoIndex } = this.state;
+    const leftIndex = photoIndex > 0 ? photoIndex - 1 : 0;
     this.setState({
-      photoIndex: leftIndex
-    })
+      photoIndex: leftIndex,
+    });
   }
 
   moveIndexRight(event) {
     event.preventDefault();
-    const rightIndex = parseInt(this.state.photoIndex) === this.state.carouselPhotos.length - 1 ? this.state.photoIndex : parseInt(this.state.photoIndex) + 1;
+    const { photoIndex, carouselPhotos } = this.state;
+    const rightIndex = photoIndex === carouselPhotos.length - 1
+      ? photoIndex : Number(photoIndex) + 1;
     this.setState({
-      photoIndex: rightIndex
-    })
+      photoIndex: rightIndex,
+    });
   }
 
   render() {
+    const { showCarousel, carouselPhotos } = this.state;
     return (
       <div>
-        {this.state.showCarousel && <Carousel carousel={this.state} toggleCarousel={this.toggleCarousel} moveIndexLeft={this.moveIndexLeft} moveIndexRight={this.moveIndexRight} />}
-        <h1>Tim's Photo Carousel</h1>
+        {showCarousel
+        && <Carousel
+          carousel={this.state}
+          toggleCarousel={this.toggleCarousel}
+          moveIndexLeft={this.moveIndexLeft}
+          moveIndexRight={this.moveIndexRight}
+        />}
+        <h1>Photo Carousel Component</h1>
         <button>FAVORITES</button>
-        <Gallery carouselPhotos={this.state.carouselPhotos} toggleCarousel={this.toggleCarousel} height={100} width={100} />
+        <Gallery
+          carouselPhotos={carouselPhotos}
+          toggleCarousel={this.toggleCarousel}
+          height={100}
+          width={100}
+        />
         <button>Show All Photos</button>
       </div>
     );

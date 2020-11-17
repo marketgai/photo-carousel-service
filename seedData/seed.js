@@ -153,32 +153,22 @@ const images = [
   'photo-1464316325666-63beaf639dbb.jpg',
   'photo-1463797221720-6b07e6426c24.jpg'];
 
-const generateRandomNumberBetween = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + min);
-};
+const generateRandomNumberBetween = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-const getRandomImage = () => {
-  return 'https://s3-us-west-1.amazonaws.com/fec.home.images/' + images[generateRandomNumberBetween(0, images.length)];
-};
+const getRandomImage = () => `https://s3-us-west-1.amazonaws.com/fec.home.images/${images[generateRandomNumberBetween(0, images.length)]}`;
 
-const getRandomDescription = () => {
-  return faker.lorem.sentence();
-};
+const getRandomDescription = () => faker.lorem.sentence();
 
-const getRandomState = () => {
-  return faker.address.state();
-};
+const getRandomState = () => faker.address.state();
 
-const generateListingIds = () => {
-  return [...Array(100).keys()];
-};
+const generateListingIds = () => [...Array(100).keys()];
 
 const getRandomFavorites = () => {
-  let favorites = [];
+  const favorites = [];
   let numberOfFavorites = generateRandomNumberBetween(3, 8);
   while (numberOfFavorites > 0) {
     favorites.push(generateRandomNumberBetween(0, 100));
-    numberOfFavorites--;
+    numberOfFavorites -= 1;
   }
   return favorites;
 };
@@ -186,19 +176,21 @@ const getRandomFavorites = () => {
 const generateSeedData = () => {
   const seedDataObject = [];
   let id = 0;
-  const listingIds = generateListingIds(); //TODO: update this when group agrees upon listing id format
+  // TODO: update this when group agrees upon listing id format
+  const listingIds = generateListingIds();
   listingIds.forEach((listingId) => {
     let numPictures = generateRandomNumberBetween(5, 15);
     while (numPictures > 0) {
-      let listingEntry = {
-        id: id,
-        listingId: listingId,
-        photo: getRandomImage(), // TODO: Add a method to prevent getting duplicate images into the same listing
-        description: getRandomDescription()
+      const listingEntry = {
+        id,
+        listingId,
+        // TODO: Add a method to prevent getting duplicate images into the same listing
+        photo: getRandomImage(),
+        description: getRandomDescription(),
       };
       seedDataObject.push(listingEntry);
-      id++;
-      numPictures--;
+      id += 1;
+      numPictures -= 1;
     }
   });
   return seedDataObject;
@@ -208,15 +200,15 @@ const users = [1, 2, 3, 4, 5];
 const generateFavoriteListings = () => {
   const seedDataFavorites = [];
   users.forEach((user) => {
-    let userFavorites = {
+    const userFavorites = {
       userId: user,
       listName: getRandomState(),
-      favoriteLists: getRandomFavorites()
+      favoriteLists: getRandomFavorites(),
     };
-    let secondFavorite = {
+    const secondFavorite = {
       userId: user,
       listName: getRandomState(),
-      favoriteLists: getRandomFavorites()
+      favoriteLists: getRandomFavorites(),
     };
     seedDataFavorites.push(userFavorites, secondFavorite);
   });

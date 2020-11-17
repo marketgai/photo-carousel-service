@@ -1,27 +1,32 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-const Carousel = ({carousel, toggleCarousel, moveIndexLeft, moveIndexRight}) => {
-  return (
-    <CarouselModal>
-      <TopLeftButtons>
-        <CloseModuleButton onClick={toggleCarousel}></CloseModuleButton>
-        <ShowAllPhotosButton onClick={()=>console.log(test)} ></ShowAllPhotosButton>
-      </TopLeftButtons>
-      <TopRightButtons>
-        <button onClick={()=>console.log(test)} >Share</button>
-        <button onClick={()=>console.log(test)} >Favorite</button>
-      </TopRightButtons>
-      <PageCounter>{parseInt(carousel.photoIndex) + 1} / {carousel.carouselPhotos.length}</PageCounter>
-      <LeftButton onClick={moveIndexLeft}></LeftButton>
-      <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo}></FocusImage>
-      <RightButton onClick={moveIndexRight} ></RightButton>
-      <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
-    </CarouselModal>
-  )
-}
+const Carousel = ({
+  carousel, toggleCarousel, moveIndexLeft, moveIndexRight,
+}) => (
+  <CarouselModal>
+    <TopLeftButtons>
+      <CloseModuleButton onClick={toggleCarousel} />
+      <ShowAllPhotosButton onClick={() => console.log(test)} />
+    </TopLeftButtons>
+    <TopRightButtons>
+      {/* <button onClick={() => console.log(test)} >Share</button>
+      <button onClick={() => console.log(test)} >Favorite</button> */}
+    </TopRightButtons>
+    <PageCounter>
+      { Number(carousel.photoIndex) + 1}
+      /
+      {carousel.carouselPhotos.length}
+    </PageCounter>
+    <LeftButton onClick={moveIndexLeft} />
+    <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
+    <RightButton onClick={moveIndexRight} />
+    <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
+  </CarouselModal>
+);
 
-//CSS via styled-components below:
+// CSS via styled-components below:
 const slideUp = keyframes`
   0% {
     height: 0px
@@ -56,13 +61,14 @@ const PageCounter = styled.h2`
   top: 5%;
   text-align: center;
   color: gray;
-`
+`;
 
 const PhotoDescription = styled.figcaption`
   position: flex;
   text-align: center;
   color: gray;
-`
+`;
+
 const TopLeftButtons = styled.div`
   position: absolute;
   top 2%;
@@ -74,7 +80,6 @@ const TopRightButtons = styled.div`
   top: 2%;
   right: 5%;
 `;
-
 
 const DirectionButton = styled.div`
   position: absolute;
