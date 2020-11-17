@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = {
       carouselPhotos: [],
       showCarousel: false,
-      photoIndex: 1,
+      photoIndex: 0,
     };
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
     this.toggleCarousel = this.toggleCarousel.bind(this);

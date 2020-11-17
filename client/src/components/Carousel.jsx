@@ -11,17 +11,19 @@ const Carousel = ({
       <ShowAllPhotosButton onClick={() => console.log(test)} />
     </TopLeftButtons>
     <TopRightButtons>
-      {/* <button onClick={() => console.log(test)} >Share</button>
-      <button onClick={() => console.log(test)} >Favorite</button> */}
+      <button onClick={() => console.log(test)} >Share</button>
+      <button onClick={() => console.log(test)} >Favorite</button>
     </TopRightButtons>
     <PageCounter>
       { Number(carousel.photoIndex) + 1}
       /
       {carousel.carouselPhotos.length}
     </PageCounter>
-    <LeftButton onClick={moveIndexLeft} />
+    {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft} />}
     <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
-    <RightButton onClick={moveIndexRight} />
+    {carousel.photoIndex === carousel.carouselPhotos.length - 1
+      ? null
+      : <RightButton onClick={moveIndexRight} />}
     <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
   </CarouselModal>
 );
