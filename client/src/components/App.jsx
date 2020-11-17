@@ -25,11 +25,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.loadListingPhotos(1);
+    this.loadListingPhotos(window.location.pathname);
   }
 
-  loadListingPhotos(id) {
-    axios.get(`/api/photo-carousel/${id}`)
+  loadListingPhotos(path) {
+    axios.get(`${path}photos`)
       .then((results) => {
         this.setState({
           carouselPhotos: results.data,
@@ -81,8 +81,8 @@ class App extends React.Component {
 
   switchCarouselMosaic(event) {
     event.preventDefault();
-    console.log(event.target.id);
-    if (this.state.showCarousel) {
+    const { showCarousel } = this.state;
+    if (showCarousel) {
       this.setState({
         showCarousel: false,
         showMosaic: true,

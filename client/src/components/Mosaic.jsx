@@ -85,7 +85,7 @@ const generateMosaicChunk = (photos, switchCarouselMosaic) => {
       chunk.push(<SmallPhoto src={photoCopies.shift().photo} key={index} id={index} onClick={switchCarouselMosaic} />);
       index += 1;
     } else if (photoCopies.length === 4) {
-      chunk.push(<LargePhoto src={photoCopies.shift().photo} key={index} id={index} onClick={switchCarouselMosaic} />);
+      chunk.push(<SmallPhoto src={photoCopies.shift().photo} key={index} id={index} onClick={switchCarouselMosaic} />);
       index += 1;
       chunk.push(<SmallPhoto src={photoCopies.shift().photo} key={index} id={index} onClick={switchCarouselMosaic} />);
       index += 1;
