@@ -51,7 +51,7 @@ const MosaicWrapper = styled.div`
 `;
 
 const CloseButton = styled.div`
-  position: absolute;
+  position: fixed;
   height: 50px;
   width: 50px;
   background-repeat: no-repeat;

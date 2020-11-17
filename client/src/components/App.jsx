@@ -113,7 +113,6 @@ class App extends React.Component {
           moveIndexRight={this.moveIndexRight}
           switchCarouselMosaic={this.switchCarouselMosaic}
         />}
-        <h1>Photo Carousel Component</h1>
         <button>FAVORITES</button>
         <Gallery
           carouselPhotos={carouselPhotos}
