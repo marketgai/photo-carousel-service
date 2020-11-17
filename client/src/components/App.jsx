@@ -4,6 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
+import Mosaic from './Mosaic.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,12 +12,14 @@ class App extends React.Component {
     this.state = {
       carouselPhotos: [],
       showCarousel: false,
+      showMosaic: false,
       photoIndex: 0,
     };
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
     this.toggleCarousel = this.toggleCarousel.bind(this);
     this.moveIndexLeft = this.moveIndexLeft.bind(this);
     this.moveIndexRight = this.moveIndexRight.bind(this);
+    this.toggleMosaic = this.toggleMosaic.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +48,15 @@ class App extends React.Component {
     });
   }
 
+  toggleMosaic(event) {
+    event.preventDefault();
+    const { showMosaic } = this.state;
+    const mosaicToggle = !showMosaic;
+    this.setState({
+      showMosaic: mosaicToggle,
+    });
+  }
+
   moveIndexLeft(event) {
     event.preventDefault();
     const { photoIndex } = this.state;
@@ -65,7 +77,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { showCarousel, carouselPhotos } = this.state;
+    const { showCarousel, carouselPhotos, showMosaic } = this.state;
     return (
       <div>
         {showCarousel
@@ -83,7 +95,8 @@ class App extends React.Component {
           height={100}
           width={100}
         />
-        <button>Show All Photos</button>
+        <button onClick={this.toggleMosaic}>Show All Photos</button>
+        {showMosaic && <Mosaic photoCarousel={carouselPhotos} />}
       </div>
     );
   }
