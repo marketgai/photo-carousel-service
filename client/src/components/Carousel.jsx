@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const Carousel = ({
-  carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic
+  carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic,
 }) => (
   <CarouselModal>
     <TopLeftButtons>
@@ -21,7 +21,7 @@ const Carousel = ({
     </PageCounter>
     {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft} />}
     <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
-    {carousel.photoIndex === carousel.carouselPhotos.length - 1
+    {carousel.photoIndex >= carousel.carouselPhotos.length - 1
       ? null
       : <RightButton onClick={moveIndexRight} />}
     <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>

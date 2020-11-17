@@ -5,6 +5,7 @@ import axios from 'axios';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
 import Mosaic from './Mosaic.jsx';
+import ShowAllPhotos from './StyledComponents.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -120,7 +121,7 @@ class App extends React.Component {
           height={100}
           width={100}
         />
-        <button onClick={this.toggleMosaic}>Show All Photos</button>
+        <ShowAllPhotos onClick={this.toggleMosaic} />
       </div>
     );
   }

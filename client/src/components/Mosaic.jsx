@@ -1,6 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const slideUp = keyframes`
+  0% {
+    height: 0px
+  }
+  100% {
+    height: 100%
+  }
+`;
 
 const SmallPhoto = styled.img`
   object-fit: cover;
@@ -28,6 +37,7 @@ const MosaicGrid = styled.div`
   width 80%;
   margin: auto;
   z-index: 10;
+  animation: 100ms ${slideUp} ease-out;
 `;
 
 const MosaicWrapper = styled.div`
