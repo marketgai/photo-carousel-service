@@ -17,5 +17,6 @@ right 5%;
   opacity: 75%;
 }
 `;
+ShowAllPhotos.displayName = 'showallphotos';
 
 export default ShowAllPhotos;
