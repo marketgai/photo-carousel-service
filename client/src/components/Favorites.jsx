@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import S from './StyledComponents.js';
 
 class Favorites extends React.Component {
   constructor(props) {
@@ -89,8 +90,12 @@ class Favorites extends React.Component {
                 {fav.listName}
               </div>
               {isFavorite(fav.favoriteLists)
-              ? <div id="heart" onClick={() => this.updateFavorite(event, fav)}>Filled Heart</div>
-              : <div id="noheart" onClick={() => this.updateFavorite(event, fav)}>Empty Heart</div>}
+              ? <button id="heart" onClick={() => this.updateFavorite(event, fav)}>
+                  <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Filled-Heart.png" />
+                </button>
+              : <button id="no-heart" onClick={() => this.updateFavorite(event, fav)}>
+                  <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+                </button>}
             </div>
           </div>
         ))}

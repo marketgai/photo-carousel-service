@@ -27,6 +27,7 @@ const ButtonImage = styled.img`
   height: 12px;
   width: 12px;
   padding-right: 7px;
+  pointer-events: none;
 `;
 
 const Close = styled(Button)`
