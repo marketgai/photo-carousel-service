@@ -20,11 +20,6 @@ describe('App Component Test Suite', function() {
     expect(wrapper.find(Mosaic).length).toBe(0);
   })
 
-  it(`has buttons`, () => {
-    const wrapper = mount(<App />);
-    expect(wrapper.find('showallphotos')).toHaveLength(1);
-  })
-
   it(`loads carousel modal on click`, () => {
     const wrapper = mount(<App />).setState(data.state12).setState({showCarousel: true});
     expect(wrapper.find(Carousel).length).toBe(1);
@@ -36,18 +31,20 @@ describe('App Component Test Suite', function() {
   })
 
   it(`mosaic modal loads correct number of pictures on load`, () => {
+    //One img tag on page, so each number should be +1
     const wrapper12 = mount(<App />).setState(data.state12).setState({showMosaic: true});
-    expect(wrapper12.find(Mosaic).find('img').length).toEqual(12);
+    expect(wrapper12.find(Mosaic).find('img').length).toEqual(13);
 
     const wrapper8 = mount(<App />).setState(data.state8).setState({showMosaic: true});
-    expect(wrapper8.find(Mosaic).find('img').length).toEqual(8);
+    expect(wrapper8.find(Mosaic).find('img').length).toEqual(9);
 
     const wrapper7 = mount(<App />).setState(data.state7).setState({showMosaic: true});
-    expect(wrapper7.find(Mosaic).find('img').length).toEqual(7);
+    expect(wrapper7.find(Mosaic).find('img').length).toEqual(8);
   })
 
   it(`carousel modal only loads one image on load`, () => {
+    //Five img tag on page, so each number should be +5
     const wrapper12 = mount(<App />).setState(data.state12).setState({showCarousel: true});
-    expect(wrapper12.find(Carousel).find('img').length).toEqual(1);
+    expect(wrapper12.find(Carousel).find('img').length).toEqual(6);
   })
 });

@@ -5,7 +5,7 @@ import axios from 'axios';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
 import Mosaic from './Mosaic.jsx';
-import ShowAllPhotos from './StyledComponents.js';
+import S from './StyledComponents.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -113,14 +113,26 @@ class App extends React.Component {
           moveIndexRight={this.moveIndexRight}
           switchCarouselMosaic={this.switchCarouselMosaic}
         />}
-        <button>FAVORITES</button>
+        <S.TopRightButtons>
+          <S.Button onClick={() => console.log('share')}>
+            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
+            Share
+          </S.Button>
+          <S.Button onClick={() => console.log('save')}>
+            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+            Save
+          </S.Button>
+        </S.TopRightButtons>
         <Gallery
           carouselPhotos={carouselPhotos}
           toggleCarousel={this.toggleCarousel}
           height={100}
           width={100}
         />
-        <ShowAllPhotos onClick={this.toggleMosaic} />
+        <S.ShowAllPhotos onClick={this.toggleMosaic}>
+          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+          Show all photos
+        </S.ShowAllPhotos>
       </div>
     );
   }
