@@ -8,10 +8,12 @@ class Favorites extends React.Component {
     this.state = {
       user: 1,
       favorites: [],
+      newListText: '',
     };
     this.loadFavorites = this.loadFavorites.bind(this);
     this.addFavorite = this.addFavorite.bind(this);
     this.updateFavorite = this.updateFavorite.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +69,13 @@ class Favorites extends React.Component {
       });
   }
 
+  handleChange(event) {
+    event.preventDefault();
+    this.setState({
+      newListText: event.target.value,
+    });
+  }
+
   render() {
     function isFavorite(favoriteList) {
       let listingId = parseInt(window.location.pathname.substring(20));
@@ -81,24 +90,32 @@ class Favorites extends React.Component {
     return (
       <div>
         <h2>Save to a list</h2>
-        {this.state.favorites.map((fav, index) => (
-          <div key={fav._id}>
-            <div onClick={() => this.addFavorite('testText')}>IMAGE Add a new Favorite List</div>
-            <div>
-              <div>
-                IMAGE
-                {fav.listName}
-              </div>
-              {isFavorite(fav.favoriteLists)
-              ? <button id="heart" onClick={() => this.updateFavorite(event, fav)}>
-                  <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Filled-Heart.png" />
-                </button>
-              : <button id="no-heart" onClick={() => this.updateFavorite(event, fav)}>
-                  <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
-                </button>}
+        <div>
+          <div>
+            <div onClick={() => this.addFavorite(this.state.newListText)}>
+              <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/AddIcon.png" />
             </div>
+            Create a new List:
+            <input type="text" value={this.state.newListText} onChange={this.handleChange} />
           </div>
-        ))}
+          {this.state.favorites.map((fav) => (
+            <div key={fav._id}>
+              <div>
+                <div>
+                  IMAGE
+                  {fav.listName}
+                </div>
+                {isFavorite(fav.favoriteLists)
+                ? <button id="heart" onClick={() => this.updateFavorite(event, fav)}>
+                    <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Filled-Heart.png" />
+                  </button>
+                : <button id="no-heart" onClick={() => this.updateFavorite(event, fav)}>
+                    <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+                  </button>}
+              </div>
+            </div>
+          ))}
+        </div>
         <button>DONE</button>
       </div>
     );
