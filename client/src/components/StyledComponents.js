@@ -53,9 +53,9 @@ const SwitchToMosaic = styled(Close)`
 
 const ShowAllPhotos = styled(Close)`
   position: absolute;
-  top: 53%;
   right: 13%;
   background: white;
+  transform: translateY(-50px);
   &:hover {
     background: rgb(230, 230, 230);
   }

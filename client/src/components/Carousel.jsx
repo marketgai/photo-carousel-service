@@ -51,6 +51,12 @@ const slideUp = keyframes`
   }
 `;
 
+const smallerOnClick = keyframes`
+  100% {
+    width: 40px;
+  }
+`;
+
 const CarouselModal = styled.div`
   position: absolute;
   bottom: 0;
@@ -72,6 +78,7 @@ const FocusImage = styled.img`
 
 const PageCounter = styled.h2`
   display: absolute;
+  font-family: sans-serif;
   position: flex;
   top: 5%;
   text-align: center;
@@ -79,6 +86,7 @@ const PageCounter = styled.h2`
 `;
 
 const PhotoDescription = styled.figcaption`
+  font-family: sans-serif;
   position: flex;
   text-align: center;
   color: gray;
@@ -117,6 +125,9 @@ const DirectionButton = styled.div`
 
   &:hover {
     background: rgb(230, 230, 230);
+  }
+  &:active {
+    animation: 200ms ${smallerOnClick} ease-out;
   }
 `;
 
