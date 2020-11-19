@@ -112,7 +112,6 @@ class App extends React.Component {
     const { showCarousel, carouselPhotos, showMosaic, showFavorites } = this.state;
     return (
       <div>
-        {showFavorites && <Favorites />}
         {showMosaic && <Mosaic
           photoCarousel={carouselPhotos}
           toggleMosaic={this.toggleMosaic}
@@ -146,6 +145,7 @@ class App extends React.Component {
           <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
           Show all photos
         </S.ShowAllPhotos>
+        {showFavorites && <Favorites toggleFavorites={this.toggleFavorites} />}
       </div>
     );
   }
