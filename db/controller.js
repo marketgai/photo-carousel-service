@@ -2,10 +2,9 @@ const db = require('./connection.js');
 
 module.exports = {
   getPhotos: (req, res) => {
-    db.PhotoCarousel.find({listingId: req.params.id}, (err, results) => {
+    db.PhotoCarousel.find({ listingId: req.params.id }, (err, results) => {
       if (err) {
-        res.status(404);
-        res.end();
+        res.sendStatus(404);
       } else {
         res.json(results);
       }
@@ -13,10 +12,9 @@ module.exports = {
   },
 
   getFavorites: (req, res) => {
-    db.UserFavorite.find({userId: req.params.userId}, (err, results) => {
+    db.UserFavorite.find({ userId: req.params.userId }, (err, results) => {
       if (err) {
-        res.status(404);
-        res.end();
+        res.sendStatus(404);
       } else {
         res.json(results);
       }
@@ -26,8 +24,7 @@ module.exports = {
   postFavorite: (req, res) => {
     db.UserFavorite.create(req.body, (err, results) => {
       if (err) {
-        res.status(400);
-        res.end();
+        res.sendStatus(400);
       } else {
         res.json(results);
       }
@@ -35,14 +32,13 @@ module.exports = {
   },
 
   updateFavorite: (req, res) => {
-    const {userId, listName, favoriteLists} = req.body;
-    db.UserFavorite.updateOne({userId: userId, listName: listName}, req.body, (err, results) => {
+    const { userId, listName } = req.body;
+    db.UserFavorite.updateOne({ userId, listName }, req.body, (err) => {
       if (err) {
-        res.status(400);
-        res.end();
+        res.sendStatus(400);
       } else {
         res.json(req.body);
       }
     });
-  }
+  },
 };

@@ -1,38 +1,126 @@
+/* eslint-disable react/jsx-wrap-multilines */
+/* eslint-disable import/extensions */
 import React from 'react';
-import styled from 'styled-components';
-import Gallery from './Gallery.jsx';
 import axios from 'axios';
+import Gallery from './Gallery.jsx';
+import Carousel from './Carousel.jsx';
+import Mosaic from './Mosaic.jsx';
+import ShowAllPhotos from './StyledComponents.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      carouselPhotos: []
+      carouselPhotos: [],
+      showCarousel: false,
+      showMosaic: false,
+      photoIndex: 0,
     };
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
+    this.toggleCarousel = this.toggleCarousel.bind(this);
+    this.moveIndexLeft = this.moveIndexLeft.bind(this);
+    this.moveIndexRight = this.moveIndexRight.bind(this);
+    this.toggleMosaic = this.toggleMosaic.bind(this);
+    this.switchCarouselMosaic = this.switchCarouselMosaic.bind(this);
   }
 
   componentDidMount() {
-    this.loadListingPhotos(1);
+    this.loadListingPhotos(window.location.pathname);
   }
 
-  loadListingPhotos(id) {
-    axios.get(`/api/photo-carousel/${id}`)
-      .then(results => {
+  loadListingPhotos(path) {
+    axios.get(`${path}photos`)
+      .then((results) => {
         this.setState({
-          carouselPhotos: results.data
+          carouselPhotos: results.data,
         });
       })
-      .catch(error => console.log(error));
-  };
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  toggleCarousel(event) {
+    event.preventDefault();
+    const { showCarousel } = this.state;
+    const carouselToggle = !showCarousel;
+    this.setState({
+      showCarousel: carouselToggle,
+      photoIndex: event.target.id,
+    });
+  }
+
+  toggleMosaic(index) {
+    console.log(index);
+    const { showMosaic } = this.state;
+    const mosaicToggle = !showMosaic;
+    this.setState({
+      showMosaic: mosaicToggle,
+      photoIndex: index,
+    });
+  }
+
+  moveIndexLeft(event) {
+    event.preventDefault();
+    const { photoIndex } = this.state;
+    const leftIndex = photoIndex > 0 ? photoIndex - 1 : 0;
+    this.setState({
+      photoIndex: leftIndex,
+    });
+  }
+
+  moveIndexRight(event) {
+    event.preventDefault();
+    const { photoIndex, carouselPhotos } = this.state;
+    const rightIndex = photoIndex === carouselPhotos.length - 1
+      ? photoIndex : Number(photoIndex) + 1;
+    this.setState({
+      photoIndex: rightIndex,
+    });
+  }
+
+  switchCarouselMosaic(event) {
+    event.preventDefault();
+    const { showCarousel } = this.state;
+    if (showCarousel) {
+      this.setState({
+        showCarousel: false,
+        showMosaic: true,
+      });
+    } else {
+      this.setState({
+        showCarousel: true,
+        showMosaic: false,
+        photoIndex: event.target.id,
+      });
+    }
+  }
 
   render() {
+    const { showCarousel, carouselPhotos, showMosaic } = this.state;
     return (
       <div>
-        <h1>Tim's Photo Carousel</h1>
+        {showMosaic && <Mosaic
+          photoCarousel={carouselPhotos}
+          toggleMosaic={this.toggleMosaic}
+          switchCarouselMosaic={this.switchCarouselMosaic}
+        />}
+        {showCarousel
+        && <Carousel
+          carousel={this.state}
+          toggleCarousel={this.toggleCarousel}
+          moveIndexLeft={this.moveIndexLeft}
+          moveIndexRight={this.moveIndexRight}
+          switchCarouselMosaic={this.switchCarouselMosaic}
+        />}
         <button>FAVORITES</button>
-        <Gallery carouselPhotos={this.state.carouselPhotos} />
-        <button>Show All Photos</button>
+        <Gallery
+          carouselPhotos={carouselPhotos}
+          toggleCarousel={this.toggleCarousel}
+          height={100}
+          width={100}
+        />
+        <ShowAllPhotos onClick={this.toggleMosaic} />
       </div>
     );
   }

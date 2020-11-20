@@ -37,3 +37,5 @@ npm install -g webpack
 npm install
 ```
 
+## Style Guide
+Refer to the [AirBnb Style Guide](https://github.com/airbnb/javascript).
