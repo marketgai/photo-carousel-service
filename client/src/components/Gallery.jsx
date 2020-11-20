@@ -31,7 +31,7 @@ const GalleryStyled = styled.div`
   min-width: 500px;
   height: 100%;
   min-height: 500px;
-  grid-gap: 10px;
+  grid-gap: 8px;
   margin-top: 80px;
 `;
 

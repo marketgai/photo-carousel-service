@@ -30,6 +30,24 @@ const ButtonImage = styled.img`
   pointer-events: none;
 `;
 
+const LargeButtonImage = styled.img`
+  height: 32px;
+  width: 32px;
+  padding: 16px;
+  margin-right: 7px;
+  background-color: black;
+  border-radius: 10px;
+`;
+
+const FavoritesButtonImage = styled.img`
+  height: 64px;
+  width: 64px;
+  margin-top: 7px;
+  margin-right: 7px;
+  background-color: black;
+  border-radius: 10px;
+`;
+
 const Close = styled(Button)`
   text-decoration: none;
   width: auto;
@@ -70,6 +88,12 @@ const TopRightButtons = styled.div`
   right: 5%;
 `;
 
+const HeartImage = styled.img`
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+`;
+
 export default {
   Button,
   ButtonImage,
@@ -77,4 +101,7 @@ export default {
   SwitchToMosaic,
   Close,
   TopRightButtons,
+  LargeButtonImage,
+  FavoritesButtonImage,
+  HeartImage,
 };

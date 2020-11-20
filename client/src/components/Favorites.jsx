@@ -22,6 +22,13 @@ class Favorites extends React.Component {
     this.loadFavorites(user);
   }
 
+  handleChange(event) {
+    event.preventDefault();
+    this.setState({
+      newListText: event.target.value,
+    });
+  }
+
   loadFavorites(userId) {
     axios.get(`/api/photo-carousel/favorites/${userId}`)
       .then((results) => {
@@ -35,8 +42,10 @@ class Favorites extends React.Component {
   }
 
   addFavorite(newListName) {
+    if (newListName === '') {
+      return;
+    }
     const listingId = parseInt(window.location.pathname.substring(20));
-    console.log([listingId]);
     const newFavorite = {
       userId: this.state.user,
       listName: newListName,
@@ -44,6 +53,9 @@ class Favorites extends React.Component {
     };
     axios.post('/api/photo-carousel/favorites', newFavorite)
       .then(this.loadFavorites(this.state.user))
+      .then(this.setState({
+        newListText: '',
+      }))
       .catch((error) => {
         console.error(error);
       });
@@ -70,13 +82,6 @@ class Favorites extends React.Component {
       });
   }
 
-  handleChange(event) {
-    event.preventDefault();
-    this.setState({
-      newListText: event.target.value,
-    });
-  }
-
   render() {
     function isFavorite(favoriteList) {
       let listingId = parseInt(window.location.pathname.substring(20));
@@ -93,32 +98,26 @@ class Favorites extends React.Component {
         <InnerModal>
           <h2>Save to a list</h2>
           <hr />
-          <div>
+          <FavLists>
             <div>
-              <div onClick={() => this.addFavorite(this.state.newListText)}>
-                <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/AddIcon.png" />
-              </div>
-              Create a new List:
-              <input type="text" value={this.state.newListText} onChange={this.handleChange} />
+              <StyledEntry>
+                <S.LargeButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" onClick={() => this.addFavorite(this.state.newListText)} />
+                Create a new List:
+                <input type="text" value={this.state.newListText} onChange={this.handleChange} />
+              </StyledEntry>
             </div>
             {this.state.favorites.map((fav) => (
-              <div key={fav._id}>
-                <div>
-                  <div>
-                    IMAGE
-                    {fav.listName}
-                  </div>
-                  {isFavorite(fav.favoriteLists)
-                  ? <button id="heart" onClick={() => this.updateFavorite(event, fav)}>
-                      <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Filled-Heart.png" />
-                    </button>
-                  : <button id="no-heart" onClick={() => this.updateFavorite(event, fav)}>
-                      <S.ButtonImage src = "https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
-                    </button>}
-                </div>
-              </div>
+              <StyledFav key={fav._id}>
+                <ImageAndText>
+                  <S.FavoritesButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" />
+                  {fav.listName}
+                </ImageAndText>
+                {isFavorite(fav.favoriteLists)
+                ? <S.HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" id="heart" onClick={() => this.updateFavorite(event, fav)} />
+                : <S.HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" id="no-heart" onClick={() => this.updateFavorite(event, fav)} />}
+              </StyledFav>
             ))}
-          </div>
+          </FavLists>
           <hr />
           <BottomRow>
             <DoneButton onClick={this.props.toggleFavorites}>Done</DoneButton>
@@ -140,24 +139,45 @@ const slideUp = keyframes`
 
 const FavoritesModal = styled.div`
   position: absolute;
-  bottom: 0px;
   left: 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   background: rgba(50,50,50,0.6);
   z-index: 10;
-  animation: 100ms ${slideUp} ease-out;
+  bottom: 0px;
+  animation: 300ms ${slideUp} ease-in;
+`;
+
+const StyledEntry = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 10px;
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+`;
+
+const StyledFav = styled(StyledEntry)`
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const InnerModal = styled.div`
-  width: 400px;
-  height: auto;
+  max-width: 75%;
+  max-height: 500px;
   background-color: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 15px;
+  margin-top: 10%;
+`;
+
+const FavLists = styled.div`
+  height: 70%;
+  overflow: auto;
 `;
 
 const BottomRow = styled.div`
@@ -173,6 +193,11 @@ const DoneButton = styled.button`
   border-radius: 10px;
   padding: 10px 20px;
   color: white;
+`;
+
+const ImageAndText = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export default Favorites;
