@@ -28,13 +28,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let id = window.location.pathname.split('/')[1];
+    const id = window.location.pathname.split('/')[1];
     this.loadListingPhotos(id);
   }
-//  window.location.pathname = /api/photo-carousel/:id
-//   '/api/photo-carousel/:id/photos
-//   window.location.pathname.split('/')[1]   = :id
-//   /
 
   loadListingPhotos(id) {
     axios.get(`/api/photo-carousel/${id}/photos`)
