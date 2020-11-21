@@ -94,7 +94,9 @@ const PageCounter = styled.h2`
   position: flex;
   top: 5%;
   text-align: center;
-  color: gray;
+  color: #484848;
+  font-size: 16px;
+  font-weight: 400;
   user-select: none;
 `;
 
@@ -129,14 +131,12 @@ const DirectionButton = styled.div`
   justify-content: center;
   align-items: center;
   top: 50%;
-  height: 50px;
-  width: 50px;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 48px;
+  width: 48px;
   cursor: pointer;
+  background: rgb(255, 255, 255);
   border: 1px solid rgb(176, 176, 176);
   border-radius: 50%;
-  background: white;
   user-select: none;
 
   &:hover {
@@ -148,11 +148,11 @@ const DirectionButton = styled.div`
 `;
 
 const LeftButton = styled(DirectionButton)`
-  left: 5%;
+  left: 3%;
 `;
 
 const RightButton = styled(DirectionButton)`
-  right: 5%;
+  right: 3%;
 `;
 
 export default Carousel;
