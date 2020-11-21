@@ -7,29 +7,29 @@ const Carousel = ({
   carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic,
 }) => (
   <CarouselModal>
-    <TopLeftButtons>
-      <S.Close onClick={toggleCarousel}>
-        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
-        Close
-      </S.Close>
-      <S.SwitchToMosaic onClick={switchCarouselMosaic}>
-        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
-        Show all photos
-      </S.SwitchToMosaic>
-    </TopLeftButtons>
-    <TopRightButtons>
-      <S.Button onClick={() => console.log('share')}>
-        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
-        Share
-      </S.Button>
-      <S.Button onClick={() => console.log('save')}>
-        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
-        Save
-      </S.Button>
-    </TopRightButtons>
+    <TopRow>
+      <TopLeftButtons>
+        <S.Close onClick={toggleCarousel}>
+          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
+          Close
+        </S.Close>
+        <S.SwitchToMosaic onClick={switchCarouselMosaic}>
+          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+          Show all photos
+        </S.SwitchToMosaic>
+      </TopLeftButtons>
+      <TopRightButtons>
+        <S.RoundButton onClick={() => console.log('share')}>
+          <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
+        </S.RoundButton>
+        <S.RoundButton onClick={() => console.log('save')}>
+          <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+        </S.RoundButton>
+      </TopRightButtons>
+    </TopRow>
     <PageCounter>
       { Number(carousel.photoIndex) + 1}
-      /
+      {' / '}
       {carousel.carouselPhotos.length}
     </PageCounter>
     {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></LeftButton>}
@@ -69,10 +69,11 @@ const smallerOnClick = keyframes`
 
 const CarouselModal = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
+  left: 0px;
   z-index: 1;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: white;
   animation: 200ms ${slideUp} ease-out;
   user-select: none;
@@ -88,40 +89,58 @@ const FocusImage = styled.img`
   user-select: none;
 `;
 
-const PageCounter = styled.h2`
-  display: absolute;
+const PageCounter = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  width: 60px;
   font-family: sans-serif;
-  position: flex;
-  top: 5%;
   text-align: center;
+  transform: translateY(-80px) translateX(-30px);
   color: #484848;
   font-size: 16px;
   font-weight: 400;
   user-select: none;
+  height: 40px;
 `;
 
 const PhotoDescription = styled.figcaption`
   font-family: sans-serif;
-  position: flex;
-  text-align: center;
-  color: gray;
+  fonst-size: 16px;
+  position: absolute;
+  bottom: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  color: rgb(34, 34, 34);
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 38px 38px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
 `;
 
 const TopLeftButtons = styled.div`
-  position: absolute;
+  position: block;
   display: flex;
   justify-content: space-between;
-  top 2%;
-  left: 5%;
   user-select: none;
 `;
 
 const TopRightButtons = styled.div`
-  position: absolute;
+  position: block;
   display: flex;
   justify-content: space-between;
-  top: 2%;
-  right: 5%;
   user-select: none;
 `;
 

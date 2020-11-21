@@ -24,12 +24,25 @@ const Button = styled.button`
   }
 `;
 
+const RoundButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+`;
+
 const ButtonImage = styled.img`
   height: 12px;
   width: 12px;
   padding-right: 7px;
   pointer-events: none;
   user-select: none;
+`;
+
+const SmallButtonImage = styled(ButtonImage)`
+  height: 16px;
+  width: 16px;
+  padding: 0px;
 `;
 
 const LargeButtonImage = styled.img`
@@ -54,14 +67,15 @@ const FavoritesButtonImage = styled.img`
 
 const Close = styled(Button)`
   text-decoration: none;
+  font-weight: 500;
   width: auto;
   border-radius: 7px;
   border-width: 1px;
   border-style: solid;
-  border-color: black;
+  border-color: transparent;
   background: rgb(230, 230, 230);
-  padding: 7px;
-  margin: 2px;
+  padding: 8px 10.5px;
+  margin-right: 20px;
   user-select: none;
   &:hover {
     background: gray;
@@ -70,7 +84,10 @@ const Close = styled(Button)`
 
 const SwitchToMosaic = styled(Close)`
   background: white;
+  border-color:black;
   user-select: none;
+  padding: 8px 13px;
+  margin-right: 0px;
   &:hover {
     background: rgb(230, 230, 230);
   }
@@ -113,4 +130,6 @@ export default {
   LargeButtonImage,
   FavoritesButtonImage,
   HeartImage,
+  SmallButtonImage,
+  RoundButton,
 };
