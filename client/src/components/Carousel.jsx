@@ -32,14 +32,24 @@ const Carousel = ({
       /
       {carousel.carouselPhotos.length}
     </PageCounter>
-    {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image4.png"/></LeftButton>}
+    {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></LeftButton>}
     <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
     {carousel.photoIndex >= carousel.carouselPhotos.length - 1
       ? null
-      : <RightButton onClick={moveIndexRight}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image2.png"/></RightButton>}
+      : <RightButton onClick={moveIndexRight}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" /></g></StyledSVG></RightButton>}
     <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
   </CarouselModal>
 );
+
+const StyledSVG = styled.svg`
+  display: block;
+  fill: none;
+  height: 12px;
+  width: 12px;
+  stroke: currentcolor;
+  stroke-width: 5.33333;
+  overflow: visible;"
+`;
 
 // CSS via styled-components below:
 const slideUp = keyframes`
@@ -65,6 +75,7 @@ const CarouselModal = styled.div`
   width: 100%;
   background-color: white;
   animation: 200ms ${slideUp} ease-out;
+  user-select: none;
 `;
 
 const FocusImage = styled.img`
@@ -74,6 +85,7 @@ const FocusImage = styled.img`
   margin-right: auto;
   max-height: 80%;
   max-width:80%;
+  user-select: none;
 `;
 
 const PageCounter = styled.h2`
@@ -83,6 +95,7 @@ const PageCounter = styled.h2`
   top: 5%;
   text-align: center;
   color: gray;
+  user-select: none;
 `;
 
 const PhotoDescription = styled.figcaption`
@@ -98,6 +111,7 @@ const TopLeftButtons = styled.div`
   justify-content: space-between;
   top 2%;
   left: 5%;
+  user-select: none;
 `;
 
 const TopRightButtons = styled.div`
@@ -106,6 +120,7 @@ const TopRightButtons = styled.div`
   justify-content: space-between;
   top: 2%;
   right: 5%;
+  user-select: none;
 `;
 
 const DirectionButton = styled.div`
@@ -122,6 +137,7 @@ const DirectionButton = styled.div`
   border: 1px solid rgb(176, 176, 176);
   border-radius: 50%;
   background: white;
+  user-select: none;
 
   &:hover {
     background: rgb(230, 230, 230);

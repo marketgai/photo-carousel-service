@@ -66,6 +66,7 @@ const SmallPhoto = styled.img`
   min-width: 200px;
   width: 100%;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     opacity: 80%;
@@ -85,6 +86,7 @@ const MosaicGrid = styled.div`
   width 80%;
   margin: auto;
   z-index: 10;
+  user-select: none;
   animation: 100ms ${slideUp} ease-out;
 `;
 
@@ -112,6 +114,7 @@ const CloseButton = styled.div`
   border-radius: 50%;
   left: 5%;
   background: white;
+  user-select: none;
 
   &:hover {
     background: rgba(34, 34, 34, 0.1)

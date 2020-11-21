@@ -33,6 +33,7 @@ const GalleryStyled = styled.div`
   min-height: 500px;
   grid-gap: 8px;
   margin-top: 80px;
+  user-select: none;
 `;
 
 const Photo = styled.img`
@@ -41,6 +42,7 @@ const Photo = styled.img`
   width: 100%;
   cursor: pointer;
   overflow: hidden;
+  user-select: none;
 
   &:hover {
     opacity: 80%;
