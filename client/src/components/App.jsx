@@ -28,11 +28,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.loadListingPhotos(window.location.pathname);
+    let id = window.location.pathname.split('/')[1];
+    this.loadListingPhotos(id);
   }
+//  window.location.pathname = /api/photo-carousel/:id
+//   '/api/photo-carousel/:id/photos
+//   window.location.pathname.split('/')[1]   = :id
+//   /
 
-  loadListingPhotos(path) {
-    axios.get(`${path}photos`)
+  loadListingPhotos(id) {
+    axios.get(`/api/photo-carousel/${id}/photos`)
       .then((results) => {
         this.setState({
           carouselPhotos: results.data,

@@ -7,7 +7,7 @@ const PORT = 3001;
 const PATH = path.join(__dirname, '/../client/dist');
 const app = express();
 
-app.use('/api/photo-carousel/:id', express.static(PATH));
+app.use('/:id', express.static(PATH));
 app.use(bodyParser.json());
 
 app.get('/api/photo-carousel/:id/photos', database.getPhotos);
