@@ -5,7 +5,8 @@ import axios from 'axios';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
 import Mosaic from './Mosaic.jsx';
-import ShowAllPhotos from './StyledComponents.js';
+import Favorites from './Favorites.jsx';
+import S from './StyledComponents.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
       carouselPhotos: [],
       showCarousel: false,
       showMosaic: false,
+      showFavorites: false,
       photoIndex: 0,
     };
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
@@ -22,6 +24,7 @@ class App extends React.Component {
     this.moveIndexRight = this.moveIndexRight.bind(this);
     this.toggleMosaic = this.toggleMosaic.bind(this);
     this.switchCarouselMosaic = this.switchCarouselMosaic.bind(this);
+    this.toggleFavorites = this.toggleFavorites.bind(this);
   }
 
   componentDidMount() {
@@ -96,8 +99,17 @@ class App extends React.Component {
     }
   }
 
+  toggleFavorites(event) {
+    event.preventDefault();
+    const { showFavorites } = this.state;
+    const favoritesToggle = !showFavorites;
+    this.setState({
+      showFavorites: favoritesToggle,
+    });
+  }
+
   render() {
-    const { showCarousel, carouselPhotos, showMosaic } = this.state;
+    const { showCarousel, carouselPhotos, showMosaic, showFavorites } = this.state;
     return (
       <div>
         {showMosaic && <Mosaic
@@ -113,14 +125,27 @@ class App extends React.Component {
           moveIndexRight={this.moveIndexRight}
           switchCarouselMosaic={this.switchCarouselMosaic}
         />}
-        <button>FAVORITES</button>
+        <S.TopRightButtons>
+          <S.Button onClick={() => console.log('share')}>
+            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
+            Share
+          </S.Button>
+          <S.Button onClick={this.toggleFavorites}>
+            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+            Save
+          </S.Button>
+        </S.TopRightButtons>
         <Gallery
           carouselPhotos={carouselPhotos}
           toggleCarousel={this.toggleCarousel}
           height={100}
           width={100}
         />
-        <ShowAllPhotos onClick={this.toggleMosaic} />
+        <S.ShowAllPhotos onClick={this.toggleMosaic}>
+          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+          Show all photos
+        </S.ShowAllPhotos>
+        {showFavorites && <Favorites toggleFavorites={this.toggleFavorites} />}
       </div>
     );
   }

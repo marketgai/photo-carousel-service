@@ -1,29 +1,42 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import S from './StyledComponents.js';
 
 const Carousel = ({
   carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic,
 }) => (
   <CarouselModal>
     <TopLeftButtons>
-      <CloseModuleButton onClick={toggleCarousel} />
-      <ShowAllPhotosButton onClick={switchCarouselMosaic} />
+      <S.Close onClick={toggleCarousel}>
+        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
+        Close
+      </S.Close>
+      <S.SwitchToMosaic onClick={switchCarouselMosaic}>
+        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+        Show all photos
+      </S.SwitchToMosaic>
     </TopLeftButtons>
     <TopRightButtons>
-      <button onClick={() => console.log(test)} >Share</button>
-      <button onClick={() => console.log(test)} >Favorite</button>
+      <S.Button onClick={() => console.log('share')}>
+        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
+        Share
+      </S.Button>
+      <S.Button onClick={() => console.log('save')}>
+        <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+        Save
+      </S.Button>
     </TopRightButtons>
     <PageCounter>
       { Number(carousel.photoIndex) + 1}
       /
       {carousel.carouselPhotos.length}
     </PageCounter>
-    {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft} />}
+    {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image4.png"/></LeftButton>}
     <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
     {carousel.photoIndex >= carousel.carouselPhotos.length - 1
       ? null
-      : <RightButton onClick={moveIndexRight} />}
+      : <RightButton onClick={moveIndexRight}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image2.png"/></RightButton>}
     <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
   </CarouselModal>
 );
@@ -35,6 +48,12 @@ const slideUp = keyframes`
   }
   100% {
     height: 100%
+  }
+`;
+
+const smallerOnClick = keyframes`
+  100% {
+    width: 40px;
   }
 `;
 
@@ -59,6 +78,7 @@ const FocusImage = styled.img`
 
 const PageCounter = styled.h2`
   display: absolute;
+  font-family: sans-serif;
   position: flex;
   top: 5%;
   text-align: center;
@@ -66,6 +86,7 @@ const PageCounter = styled.h2`
 `;
 
 const PhotoDescription = styled.figcaption`
+  font-family: sans-serif;
   position: flex;
   text-align: center;
   color: gray;
@@ -73,18 +94,25 @@ const PhotoDescription = styled.figcaption`
 
 const TopLeftButtons = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: space-between;
   top 2%;
   left: 5%;
 `;
 
 const TopRightButtons = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: space-between;
   top: 2%;
   right: 5%;
 `;
 
 const DirectionButton = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 50%;
   height: 50px;
   width: 50px;
@@ -93,40 +121,21 @@ const DirectionButton = styled.div`
   cursor: pointer;
   border: 1px solid rgb(176, 176, 176);
   border-radius: 50%;
+  background: white;
 
   &:hover {
-    opacity: 75%;
+    background: rgb(230, 230, 230);
   }
-`;
-
-const CloseModuleButton = styled.button`
-  background-image: url("https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/CloseButton.png");
-  height: 2.5em;
-  width: 7em;
-  background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  border: 1px solid white;
-  border-radius: 10px;
-
-  &:hover {
-    opacity: 75%;
+  &:active {
+    animation: 200ms ${smallerOnClick} ease-out;
   }
-`;
-
-const ShowAllPhotosButton = styled(CloseModuleButton)`
-  background-image: url("https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/ShowAllPhotos.png");
-  width: 15em;
-  border: 1px solid rgb(176, 176, 176);
 `;
 
 const LeftButton = styled(DirectionButton)`
-  background-image: url("https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image4.png");
   left: 5%;
 `;
 
 const RightButton = styled(DirectionButton)`
-  background-image: url("https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image2.png");
   right: 5%;
 `;
 
