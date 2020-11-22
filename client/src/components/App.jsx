@@ -2,10 +2,12 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
+import TitleBar from './TitleBar.jsx';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
 import Mosaic from './Mosaic.jsx';
 import Favorites from './Favorites.jsx';
+import Header from './Header.jsx';
 import S from './StyledComponents.js';
 
 class App extends React.Component {
@@ -17,6 +19,10 @@ class App extends React.Component {
       showMosaic: false,
       showFavorites: false,
       photoIndex: 0,
+      listingName: null,
+      listingStars: null,
+      listingNumReviews: null,
+      listingLocation: null,
     };
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
     this.toggleCarousel = this.toggleCarousel.bind(this);
@@ -37,6 +43,10 @@ class App extends React.Component {
       .then((results) => {
         this.setState({
           carouselPhotos: results.data,
+          listingName: results.data[0].listingName,
+          listingStars: results.data[0].listingStars,
+          listingNumReviews: results.data[0].listingNumReviews,
+          listingLocation: results.data[0].listingLocation,
         });
       })
       .catch((error) => {
@@ -110,7 +120,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { showCarousel, carouselPhotos, showMosaic, showFavorites } = this.state;
+    const { showCarousel, carouselPhotos, showMosaic, showFavorites, listingName, listingStars, listingNumReviews, listingLocation} = this.state;
     return (
       <div>
         {showMosaic && <Mosaic
@@ -126,16 +136,14 @@ class App extends React.Component {
           moveIndexRight={this.moveIndexRight}
           switchCarouselMosaic={this.switchCarouselMosaic}
         />}
-        <S.TopRightButtons>
-          <S.Button onClick={() => console.log('share')}>
-            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
-            Share
-          </S.Button>
-          <S.Button onClick={this.toggleFavorites}>
-            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
-            Save
-          </S.Button>
-        </S.TopRightButtons>
+        <Header />
+        <TitleBar
+          listingName={listingName}
+          listingStars={listingStars}
+          listingNumReviews={listingNumReviews}
+          listingLocation={listingLocation}
+          toggleFavorites={this.toggleFavorites}
+        />
         <Gallery
           carouselPhotos={carouselPhotos}
           toggleCarousel={this.toggleCarousel}

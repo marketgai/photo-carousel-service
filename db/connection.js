@@ -14,6 +14,10 @@ const photoCarouselSchema = new mongoose.Schema({
   listingId: Number,
   photo: String,
   description: String,
+  listingName: String,
+  listingStars: Number,
+  listingNumReviews: Number,
+  listingLocation: String,
 });
 
 const userFavoritesSchema = new mongoose.Schema({

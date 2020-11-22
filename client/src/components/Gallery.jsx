@@ -32,7 +32,7 @@ const GalleryStyled = styled.div`
   height: 100%;
   min-height: 500px;
   grid-gap: 8px;
-  margin-top: 80px;
+  margin-top: 24px;
   user-select: none;
 `;
 

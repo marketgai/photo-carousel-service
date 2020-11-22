@@ -163,6 +163,23 @@ const getRandomState = () => faker.address.state();
 
 const generateListingIds = () => [...Array(100).keys()];
 
+const getListingName = () => {
+  const description = (faker.company.bsAdjective());
+  const capitalizedDescription = description.charAt(0).toUpperCase() + description.slice(1);
+  const name = faker.address.streetName();
+  return `${capitalizedDescription} ${name} Home`;
+};
+
+const getListingStars = () => (Math.random() * 5).toFixed(2);
+
+const getListingNumReviews = () => Math.floor(Math.random() * 800);
+
+const getListingLocation = () => {
+  const county = faker.address.county();
+  const state = faker.address.state();
+  return `${county}, ${state}, United States`;
+};
+
 const getRandomFavorites = () => {
   const favorites = [];
   let numberOfFavorites = generateRandomNumberBetween(3, 8);
@@ -180,13 +197,20 @@ const generateSeedData = () => {
   const listingIds = generateListingIds();
   listingIds.forEach((listingId) => {
     let numPictures = generateRandomNumberBetween(5, 15);
+    const listingName = getListingName();
+    const listingStars = getListingStars();
+    const listingNumReviews = getListingNumReviews();
+    const listingLocation = getListingLocation();
     while (numPictures > 0) {
       const listingEntry = {
         id,
         listingId,
-        // TODO: Add a method to prevent getting duplicate images into the same listing
         photo: getRandomImage(),
         description: getRandomDescription(),
+        listingName,
+        listingStars,
+        listingNumReviews,
+        listingLocation,
       };
       seedDataObject.push(listingEntry);
       id += 1;

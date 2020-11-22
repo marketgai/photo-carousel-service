@@ -72,8 +72,8 @@ const CarouselModal = styled.div`
   bottom: 0px;
   left: 0px;
   z-index: 1;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background-color: white;
   animation: 200ms ${slideUp} ease-out;
   user-select: none;

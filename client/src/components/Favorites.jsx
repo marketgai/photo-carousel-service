@@ -45,7 +45,7 @@ class Favorites extends React.Component {
     if (newListName === '') {
       return;
     }
-    const listingId = window.location.pathname.split('/')[1];
+    const listingId = parseInt(window.location.pathname.substring(20));
     const newFavorite = {
       userId: this.state.user,
       listName: newListName,
@@ -63,7 +63,7 @@ class Favorites extends React.Component {
 
   updateFavorite(event, fav) {
     event.preventDefault();
-    let listingId = window.location.pathname.split('/')[1];
+    let listingId = parseInt(window.location.pathname.substring(20));
     let newFavList = fav.favoriteLists;
     if (event.target.id === 'heart') {
       newFavList = newFavList.filter((listing) => (Number(listing) !== Number(listingId)));
@@ -84,7 +84,7 @@ class Favorites extends React.Component {
 
   render() {
     function isFavorite(favoriteList) {
-      let listingId = window.location.pathname.split('/')[1];
+      let listingId = parseInt(window.location.pathname.substring(20));
       let isFavorite = false;
       for (var i = 0; i < favoriteList.length; i++) {
         if (favoriteList[i] === listingId) {

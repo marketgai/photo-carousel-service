@@ -105,7 +105,6 @@ const ShowAllPhotos = styled(Close)`
 `;
 
 const TopRightButtons = styled.div`
-  position: absolute;
   display: flex;
   justify-content: space-between;
   user-select: none;
