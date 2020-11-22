@@ -42,22 +42,15 @@ const generateMosaicChunk = (photos, switchCarouselMosaic) => {
 };
 
 const Mosaic = ({ photoCarousel, toggleMosaic, switchCarouselMosaic }) => (
-  <MosaicWrapper>
-    <CloseButton onClick={toggleMosaic}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image4.png"/></CloseButton>
-    <MosaicGrid>
-      {generateMosaicChunk(photoCarousel, switchCarouselMosaic)}
-    </MosaicGrid>
-  </MosaicWrapper>
+  <MosaicPositioning>
+    <MosaicWrapper>
+      <CloseButton onClick={toggleMosaic}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image4.png"/></CloseButton>
+      <MosaicGrid>
+        {generateMosaicChunk(photoCarousel, switchCarouselMosaic)}
+      </MosaicGrid>
+    </MosaicWrapper>
+  </MosaicPositioning>
 );
-
-const slideUp = keyframes`
-  0% {
-    height: 0px
-  }
-  100% {
-    height: 100%
-  }
-`;
 
 const SmallPhoto = styled.img`
   object-fit: cover;
@@ -77,27 +70,58 @@ const LargePhoto = styled(SmallPhoto)`
   grid-area: span 2 / span 2
 `;
 
+const slideUp = keyframes`
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 100%
+  }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1
+  }
+`;
+
+const MosaicPositioning = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+`;
+
+const MosaicWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  bottom: 0px;
+  justify-contents: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 10;
+  animation: 200ms ${slideUp} ease-in;
+`;
+
 const MosaicGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(auto-fill, 120px);
   grid-row-gap: 1em;
   grid-column-gap: 1em;
-  width 80%;
+  max-width: 55%;
   margin: auto;
+  padding: 55px 100px;
   z-index: 10;
   user-select: none;
-  animation: 100ms ${slideUp} ease-out;
-`;
-
-const MosaicWrapper = styled.div`
-  position: absolute;
-  display: flex;
-  justify-contents: center;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  z-index: 10;
+  animation: 1000ms ${fadeIn} ease-in;
 `;
 
 const CloseButton = styled.div`
