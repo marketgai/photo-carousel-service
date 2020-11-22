@@ -3,15 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Gallery = ({ carouselPhotos, toggleCarousel }) => {
-  // Implement a counter to only let first 5 pictures for gallery.
   let photoCount = 0;
   return (
     <div>
       <GalleryStyled>
-        {carouselPhotos[0]
-          && <MainPhoto src={carouselPhotos[0].photo} onClick={toggleCarousel} id={0} />}
         {carouselPhotos.map((image, index) => {
-          if (photoCount < 4 && index > 0) {
+          if (photoCount < 5) {
             photoCount += 1;
             return <Photo src={image.photo} key={image.id} id={index} onClick={toggleCarousel} />;
           }
@@ -43,14 +40,14 @@ const Photo = styled.img`
   cursor: pointer;
   overflow: hidden;
   user-select: none;
-
+  border-top-right-radius: ${props => props.id === 2 ? "12px" : null};
+  border-bottom-right-radius: ${props => props.id === 4 ? "12px" : null};
+  border-top-left-radius: ${props => props.id === 0 ? "12px" : null};
+  border-bottom-left-radius: ${props => props.id === 0 ? "12px" : null};
+  grid-area: ${props => props.id === 0 ? "span 2 / span 2" : "span 1 / span 1"};
   &:hover {
     opacity: 80%;
   }
-`;
-
-const MainPhoto = styled(Photo)`
-  grid-area: span 2 / span 2
 `;
 
 export default Gallery;
