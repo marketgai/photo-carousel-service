@@ -44,7 +44,7 @@ const generateMosaicChunk = (photos, switchCarouselMosaic) => {
 const Mosaic = ({ photoCarousel, toggleMosaic, switchCarouselMosaic }) => (
   <MosaicPositioning>
     <MosaicWrapper>
-      <CloseButton onClick={toggleMosaic}><img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image4.png"/></CloseButton>
+      <CloseButton onClick={toggleMosaic}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></CloseButton>
       <MosaicGrid>
         {generateMosaicChunk(photoCarousel, switchCarouselMosaic)}
       </MosaicGrid>
@@ -68,6 +68,16 @@ const SmallPhoto = styled.img`
 
 const LargePhoto = styled(SmallPhoto)`
   grid-area: span 2 / span 2
+`;
+
+const StyledSVG = styled.svg`
+  display: block;
+  fill: none;
+  height: 12px;
+  width: 12px;
+  stroke: currentcolor;
+  stroke-width: 5.33333;
+  overflow: visible;"
 `;
 
 const slideUp = keyframes`
@@ -139,6 +149,7 @@ const CloseButton = styled.div`
   left: 5%;
   background: white;
   user-select: none;
+  margin: 55px 0px;
 
   &:hover {
     background: rgba(34, 34, 34, 0.1)

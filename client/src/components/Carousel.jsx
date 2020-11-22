@@ -6,39 +6,41 @@ import S from './StyledComponents.js';
 const Carousel = ({
   carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic,
 }) => (
-  <CarouselModal>
-    <TopRow>
-      <TopLeftButtons>
-        <S.Close onClick={toggleCarousel}>
-          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
-          Close
-        </S.Close>
-        <S.SwitchToMosaic onClick={switchCarouselMosaic}>
-          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
-          Show all photos
-        </S.SwitchToMosaic>
-      </TopLeftButtons>
-      <TopRightButtons>
-        <S.RoundButton onClick={() => console.log('share')}>
-          <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
-        </S.RoundButton>
-        <S.RoundButton onClick={() => console.log('save')}>
-          <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
-        </S.RoundButton>
-      </TopRightButtons>
-    </TopRow>
-    <PageCounter>
-      { Number(carousel.photoIndex) + 1}
-      {' / '}
-      {carousel.carouselPhotos.length}
-    </PageCounter>
-    {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></LeftButton>}
-    <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
-    {carousel.photoIndex >= carousel.carouselPhotos.length - 1
-      ? null
-      : <RightButton onClick={moveIndexRight}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" /></g></StyledSVG></RightButton>}
-    <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
-  </CarouselModal>
+  <CarouselWrapper>
+    <CarouselModal>
+      <TopRow>
+        <TopLeftButtons>
+          <S.Close onClick={toggleCarousel}>
+            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
+            Close
+          </S.Close>
+          <S.SwitchToMosaic onClick={switchCarouselMosaic}>
+            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+            Show all photos
+          </S.SwitchToMosaic>
+        </TopLeftButtons>
+        <TopRightButtons>
+          <S.RoundButton onClick={() => console.log('share')}>
+            <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
+          </S.RoundButton>
+          <S.RoundButton onClick={() => console.log('save')}>
+            <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+          </S.RoundButton>
+        </TopRightButtons>
+      </TopRow>
+      <PageCounter>
+        { Number(carousel.photoIndex) + 1}
+        {' / '}
+        {carousel.carouselPhotos.length}
+      </PageCounter>
+      {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></LeftButton>}
+      <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
+      {carousel.photoIndex >= carousel.carouselPhotos.length - 1
+        ? null
+        : <RightButton onClick={moveIndexRight}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" /></g></StyledSVG></RightButton>}
+      <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
+    </CarouselModal>
+  </CarouselWrapper>
 );
 
 const StyledSVG = styled.svg`
@@ -54,10 +56,24 @@ const StyledSVG = styled.svg`
 // CSS via styled-components below:
 const slideUp = keyframes`
   0% {
-    height: 0px
+    height: 0px;
+    opacity: 0;
   }
   100% {
     height: 100%
+    opacity: 1;
+  }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1
   }
 `;
 
@@ -67,6 +83,16 @@ const smallerOnClick = keyframes`
   }
 `;
 
+const CarouselWrapper = styled.div`
+  position: absolute;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: white;
+  animation: 200ms ${slideUp} ease-in;
+`;
+
 const CarouselModal = styled.div`
   position: absolute;
   bottom: 0px;
@@ -74,8 +100,7 @@ const CarouselModal = styled.div`
   z-index: 1;
   height: 100%;
   width: 100%;
-  background-color: white;
-  animation: 200ms ${slideUp} ease-out;
+  animation: 1000ms ${fadeIn} ease-in;
   user-select: none;
 `;
 
