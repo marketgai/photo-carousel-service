@@ -9,15 +9,15 @@ const PATH = path.join(__dirname, '/../client/dist');
 const app = express();
 
 app.use(morgan('dev'));
-app.use('/:id', express.static(PATH));
+app.use('/:id/', express.static(PATH));
 app.use(bodyParser.json());
 
-app.get('/api/photo-carousel/:id/photos', database.getPhotos);
+app.get('/api/photo-carousel/:id/photos/', database.getPhotos);
 
-app.get('/api/photo-carousel/favorites/:userId', database.getFavorites);
+app.get('/api/photo-carousel/favorites/:userId/', database.getFavorites);
 
-app.post('/api/photo-carousel/favorites', database.postFavorite);
+app.post('/api/photo-carousel/favorites/', database.postFavorite);
 
-app.put('/api/photo-carousel/favorites', database.updateFavorite);
+app.put('/api/photo-carousel/favorites/', database.updateFavorite);
 
 app.listen(PORT, () => { console.log('server is listening at port ', PORT); });
