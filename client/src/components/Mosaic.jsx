@@ -87,11 +87,21 @@ const slideUp = keyframes`
   100% {
     height: 100%
   }
+  0% {
+    z-index: 100;
+  }
+  99% {
+    z-index: 100;
+  }
+  100% {
+    z-index: 5;
+  }
 `;
 
 const fadeIn = keyframes`
   0% {
     opacity: 0;
+
   }
   20% {
     opacity: 0;
@@ -105,7 +115,6 @@ const MosaicPositioning = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 10;
 `;
 
 const MosaicWrapper = styled.div`
@@ -116,7 +125,7 @@ const MosaicWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
-  z-index: 10;
+  z-index: 5;
   animation: 200ms ${slideUp} ease-in;
 `;
 
@@ -129,7 +138,7 @@ const MosaicGrid = styled.div`
   max-width: 55%;
   margin: auto;
   padding: 55px 100px;
-  z-index: 10;
+  z-index: 5;
   user-select: none;
   animation: 1000ms ${fadeIn} ease-in;
 `;

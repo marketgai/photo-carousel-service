@@ -98,15 +98,21 @@ class App extends React.Component {
     const { showCarousel } = this.state;
     if (showCarousel) {
       this.setState({
-        showCarousel: false,
         showMosaic: true,
-      });
+      }, () => setTimeout(() => {
+        this.setState({
+          showCarousel: false,
+        });
+      }, 200));
     } else {
       this.setState({
         showCarousel: true,
-        showMosaic: false,
         photoIndex: event.target.id,
-      });
+      }, () => setTimeout(() => {
+        this.setState({
+          showMosaic: false,
+        });
+      }, 200));
     }
   }
 

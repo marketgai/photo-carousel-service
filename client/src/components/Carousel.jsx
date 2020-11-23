@@ -88,7 +88,7 @@ const CarouselWrapper = styled.div`
   bottom: 0px;
   height: 100%;
   width: 100%;
-  z-index: 1;
+  z-index: 10;
   background-color: white;
   animation: 200ms ${slideUp} ease-in;
 `;
@@ -97,7 +97,6 @@ const CarouselModal = styled.div`
   position: absolute;
   bottom: 0px;
   left: 0px;
-  z-index: 1;
   height: 100%;
   width: 100%;
   animation: 1000ms ${fadeIn} ease-in;
