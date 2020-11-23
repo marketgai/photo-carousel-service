@@ -1,0 +1,1 @@
+ssh -i "/Users/timothyakana/Documents/Hack_Reactor/FEC/service/photoCarousel.pem" ubuntu@ec2-50-18-90-118.us-west-1.compute.amazonaws.com
