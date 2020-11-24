@@ -84,7 +84,7 @@ const slideUp = keyframes`
   0% {
     height: 0px;
   }
-  100% {
+  50% {
     height: 100%
   }
   0% {
@@ -126,7 +126,7 @@ const MosaicWrapper = styled.div`
   height: 100%;
   background-color: white;
   z-index: 5;
-  animation: 200ms ${slideUp} ease-in;
+  animation: 400ms ${slideUp} ease-in;
 `;
 
 const MosaicGrid = styled.div`
