@@ -94,36 +94,42 @@ class Favorites extends React.Component {
       return isFavorite;
     }
     return (
-      <FavoritesModal>
-        <InnerModal>
-          <h2>Save to a list</h2>
-          <hr />
-          <FavLists>
-            <div>
-              <StyledEntry>
-                <S.LargeButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" onClick={() => this.addFavorite(this.state.newListText)} />
-                Create a new List:
-                <input type="text" value={this.state.newListText} onChange={this.handleChange} />
-              </StyledEntry>
-            </div>
-            {this.state.favorites.map((fav) => (
-              <StyledFav key={fav._id}>
-                <ImageAndText>
-                  <S.FavoritesButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" />
-                  {fav.listName}
-                </ImageAndText>
-                {isFavorite(fav.favoriteLists)
-                ? <S.HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" id="heart" onClick={() => this.updateFavorite(event, fav)} />
-                : <S.HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" id="no-heart" onClick={() => this.updateFavorite(event, fav)} />}
-              </StyledFav>
-            ))}
-          </FavLists>
-          <hr />
-          <BottomRow>
-            <DoneButton onClick={this.props.toggleFavorites}>Done</DoneButton>
-          </BottomRow>
-        </InnerModal>
-      </FavoritesModal>
+      <FavoritesWrapper>
+        <FavoritesModal>
+          <InnerModal>
+            <TopRow>
+              <CloseButton onClick={this.props.toggleFavorites} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></CloseButton>
+              <SaveText>Save to a list</SaveText>
+              <EmptyDiv />
+            </TopRow>
+            <GrayLine />
+            <FavLists>
+              <div>
+                <StyledEntry>
+                  <S.LargeButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" onClick={() => this.addFavorite(this.state.newListText)} />
+                  Create a new List:
+                  <input type="text" value={this.state.newListText} onChange={this.handleChange} />
+                </StyledEntry>
+              </div>
+              {this.state.favorites.map((fav) => (
+                <StyledFav key={fav._id}>
+                  <ImageAndText>
+                    <S.FavoritesButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" />
+                    {fav.listName}
+                  </ImageAndText>
+                  {isFavorite(fav.favoriteLists)
+                  ? <S.HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" id="heart" onClick={() => this.updateFavorite(event, fav)} />
+                  : <S.HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" id="no-heart" onClick={() => this.updateFavorite(event, fav)} />}
+                </StyledFav>
+              ))}
+            </FavLists>
+            <GrayLine />
+            <BottomRow>
+              <DoneButton onClick={this.props.toggleFavorites}>Done</DoneButton>
+            </BottomRow>
+          </InnerModal>
+        </FavoritesModal>
+      </FavoritesWrapper>
     );
   }
 }
@@ -137,17 +143,38 @@ const slideUp = keyframes`
   }
 `;
 
-const FavoritesModal = styled.div`
+const fadeIn = keyframes`
+  0% {
+    background: rgba(50,50,50,0.0);
+  }
+  100% {
+    background: rgba(50,50,50,0.6);
+  }
+`;
+
+const FavoritesWrapper = styled.div`
   position: absolute;
+  display: flex;
+  align-items: flex-end;
   left: 0px;
   display: flex;
-  justify-content: center;
   width: 100%;
   height: 100%;
   background: rgba(50,50,50,0.6);
   z-index: 10;
   bottom: 0px;
-  animation: 300ms ${slideUp} ease-in;
+  animation: 200ms ${fadeIn} ease-in;
+`;
+
+const FavoritesModal = styled.div`
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  bottom: 0px;
+  animation: 400ms ${slideUp} ease-out;
 `;
 
 const StyledEntry = styled.div`
@@ -166,6 +193,44 @@ const StyledFav = styled(StyledEntry)`
   align-items: center;
 `;
 
+const CloseButton = styled.svg`
+  display: absolute;
+  fill: none;
+  height: 16px;
+  width: 16px;
+  stroke:
+  currentcolor;
+  stroke-width: 3;
+  z-index: 11;
+  overflow: visible;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50%;
+  padding: 8px;
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+`;
+
+const SaveText = styled.div`
+  display: absolute;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const EmptyDiv = styled.div`
+  height: 16px;
+  width: 16px;
+`;
+
+const GrayLine = styled.hr`
+  border-color: rgb(211,211,211);
+  height: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
 const InnerModal = styled.div`
   max-width: 75%;
   max-height: 500px;
@@ -173,6 +238,12 @@ const InnerModal = styled.div`
   padding: 40px;
   border-radius: 15px;
   margin-top: 10%;
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const FavLists = styled.div`
@@ -193,6 +264,8 @@ const DoneButton = styled.button`
   border-radius: 10px;
   padding: 10px 20px;
   color: white;
+  cursor: pointer;
+  user-select: none;
 `;
 
 const ImageAndText = styled.div`

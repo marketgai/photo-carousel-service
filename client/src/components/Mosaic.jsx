@@ -90,18 +90,14 @@ const slideUp = keyframes`
   0% {
     z-index: 100;
   }
-  99% {
-    z-index: 100;
-  }
   100% {
-    z-index: 5;
+    z-index: 100%;
   }
 `;
 
 const fadeIn = keyframes`
   0% {
     opacity: 0;
-
   }
   20% {
     opacity: 0;
@@ -112,18 +108,26 @@ const fadeIn = keyframes`
 `;
 
 const MosaicPositioning = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  animation: 400ms ${slideUp} ease-in;
 `;
 
 const MosaicWrapper = styled.div`
   position: absolute;
+  overflow: auto;
   display: flex;
   bottom: 0px;
+  left: 0px;
+  right: 0px;
   justify-contents: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
   z-index: 5;
   animation: 400ms ${slideUp} ease-in;

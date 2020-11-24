@@ -65,7 +65,6 @@ class App extends React.Component {
   }
 
   toggleMosaic(index) {
-    console.log(index);
     const { showMosaic } = this.state;
     const mosaicToggle = !showMosaic;
     this.setState({
@@ -103,7 +102,7 @@ class App extends React.Component {
         this.setState({
           showCarousel: false,
         });
-      }, 200));
+      }, 250));
     } else {
       this.setState({
         showCarousel: true,
@@ -112,7 +111,7 @@ class App extends React.Component {
         this.setState({
           showMosaic: false,
         });
-      }, 200));
+      }, 250));
     }
   }
 

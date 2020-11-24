@@ -6,7 +6,7 @@ import S from './StyledComponents.js';
 const Carousel = ({
   carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic,
 }) => (
-  <CarouselWrapper>
+  <CarouselWrapper onScroll={() => console.log('scrolling')}>
     <CarouselModal>
       <TopRow>
         <TopLeftButtons>
@@ -84,7 +84,7 @@ const smallerOnClick = keyframes`
 `;
 
 const CarouselWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   height: 100%;
   width: 100%;
