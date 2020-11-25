@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import S from './StyledComponents.js';
 
 const Carousel = ({
-  carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic,
+  carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic, toggleFavorites, isFavorite,
 }) => (
   <CarouselWrapper onScroll={() => console.log('scrolling')}>
     <CarouselModal>
@@ -23,8 +23,8 @@ const Carousel = ({
           <S.RoundButton onClick={() => console.log('share')}>
             <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
           </S.RoundButton>
-          <S.RoundButton onClick={() => console.log('save')}>
-            <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+          <S.RoundButton onClick={toggleFavorites}>
+            {isFavorite ? <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" /> : <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" />}
           </S.RoundButton>
         </TopRightButtons>
       </TopRow>

@@ -167,6 +167,8 @@ class App extends React.Component {
           moveIndexLeft={this.moveIndexLeft}
           moveIndexRight={this.moveIndexRight}
           switchCarouselMosaic={this.switchCarouselMosaic}
+          toggleFavorites={this.toggleFavorites}
+          isFavorite={this.state.isFavorite}
         />}
         <Header />
         <TitleBar
