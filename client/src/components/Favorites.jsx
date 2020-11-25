@@ -10,11 +10,13 @@ class Favorites extends React.Component {
       user: 1,
       favorites: [],
       newListText: '',
+      isCreatingNew: false,
     };
     this.loadFavorites = this.loadFavorites.bind(this);
     this.addFavorite = this.addFavorite.bind(this);
     this.updateFavorite = this.updateFavorite.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleFavoriteScreen = this.toggleFavoriteScreen.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +43,13 @@ class Favorites extends React.Component {
       });
   }
 
+  toggleFavoriteScreen() {
+    const toggleCreation = !this.state.isCreatingNew;
+    this.setState({
+      isCreatingNew: toggleCreation,
+    });
+  }
+
   addFavorite(newListName) {
     if (newListName === '') {
       return;
@@ -59,6 +68,9 @@ class Favorites extends React.Component {
       .then(this.setState({
         newListText: '',
       }))
+      .then(() => {
+        this.toggleFavoriteScreen();
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -110,9 +122,8 @@ class Favorites extends React.Component {
             <FavLists>
               <div>
                 <StyledEntry>
-                  <S.LargeButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" onClick={() => this.addFavorite(this.state.newListText)} />
-                  Create a new List:
-                  <input type="text" value={this.state.newListText} onChange={this.handleChange} />
+                  <S.LargeButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" onClick={() => this.toggleFavoriteScreen()} />
+                  Create a new List
                 </StyledEntry>
               </div>
               {this.state.favorites.map((fav) => (
@@ -132,6 +143,24 @@ class Favorites extends React.Component {
               <DoneButton onClick={this.props.toggleFavorites}>Done</DoneButton>
             </BottomRow>
           </InnerModal>
+          {this.state.isCreatingNew ? (
+            <AddNewWrapper>
+              <AddNew>
+                <TopRow>
+                  <CloseButton onClick={this.toggleFavoriteScreen} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false"><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></CloseButton>
+                  <SaveText>Name this list</SaveText>
+                  <EmptyDiv />
+                </TopRow>
+                <GrayLine />
+                <NewFavInput type="text" maxlength="50" value={this.state.newListText} onChange={this.handleChange} />
+                <GrayLine />
+                <BottomRow>
+                  <CreateButton onClick={() => this.addFavorite(this.state.newListText)}>Create</CreateButton>
+                </BottomRow>
+              </AddNew>
+            </AddNewWrapper>
+          )
+            : null}
         </FavoritesModal>
       </FavoritesWrapper>
     );
@@ -244,6 +273,31 @@ const InnerModal = styled.div`
   margin-top: 10%;
 `;
 
+const AddNewWrapper = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  left: 0px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: rgba(50,50,50,0.6);
+  z-index: 500;
+  bottom: 0px;
+  animation: 200ms ${fadeIn} ease-in;
+`;
+
+const AddNew = styled.div`
+  position: fixed;
+  min-width: 30%;
+  max-height: 30%;
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+  margin-top: 250px;
+  z-index: 500;
+`;
+
 const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -260,6 +314,21 @@ const BottomRow = styled.div`
   justify-content: flex-end;
 `;
 
+const NewFavInput = styled.input`
+  width: 100%;
+  border-radius: 10px;
+  color: #C8C8C8
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  height: 60px;
+  user-select: none;
+  &:focus {
+    outline: 0;
+  }
+`;
+
 const DoneButton = styled.button`
   background-color: black;
   border-color: black;
@@ -270,6 +339,22 @@ const DoneButton = styled.button`
   color: white;
   cursor: pointer;
   user-select: none;
+`;
+
+const CreateButton = styled.button`
+  background-color: black;
+  border-color: black;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  &:focus {
+    outline: 0;
+  }
 `;
 
 const ImageAndText = styled.div`
