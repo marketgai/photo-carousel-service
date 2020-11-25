@@ -60,7 +60,6 @@ const FavoritesButtonImage = styled.img`
   width: 64px;
   margin-top: 7px;
   margin-right: 7px;
-  background-color: black;
   border-radius: 10px;
   user-select: none;
 `;

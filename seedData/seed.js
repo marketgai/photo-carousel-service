@@ -224,15 +224,22 @@ const users = [1, 2, 3, 4, 5];
 const generateFavoriteListings = () => {
   const seedDataFavorites = [];
   users.forEach((user) => {
+    const fav1 = getRandomState();
+    let fav2 = getRandomState();
+    while (fav1 === fav2) {
+      fav2 = getRandomState();
+    }
     const userFavorites = {
       userId: user,
-      listName: getRandomState(),
+      listName: fav1,
       favoriteLists: getRandomFavorites(),
+      favoritePicture: getRandomImage(),
     };
     const secondFavorite = {
       userId: user,
-      listName: getRandomState(),
+      listName: fav2,
       favoriteLists: getRandomFavorites(),
+      favoritePicture: getRandomImage(),
     };
     seedDataFavorites.push(userFavorites, secondFavorite);
   });

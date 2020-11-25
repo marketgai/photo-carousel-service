@@ -159,7 +159,7 @@ class App extends React.Component {
           <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
           Show all photos
         </S.ShowAllPhotos>
-        {showFavorites && <Favorites toggleFavorites={this.toggleFavorites} />}
+        {showFavorites && <Favorites toggleFavorites={this.toggleFavorites} mainPic={this.state.carouselPhotos[0].photo} />}
       </div>
     );
   }

@@ -24,6 +24,7 @@ const userFavoritesSchema = new mongoose.Schema({
   userId: Number,
   listName: String,
   favoriteLists: Array,
+  favoritePicture: String,
 });
 
 const PhotoCarousel = mongoose.model('photoCarousel', photoCarouselSchema);

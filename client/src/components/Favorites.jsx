@@ -45,12 +45,14 @@ class Favorites extends React.Component {
     if (newListName === '') {
       return;
     }
-    const listingId = parseInt(window.location.pathname.substring(20));
+    const listingId = window.location.pathname.split('/')[1];
     const newFavorite = {
       userId: this.state.user,
       listName: newListName,
       favoriteLists: [listingId],
+      favoritePicture: this.props.mainPic,
     };
+
     axios.post('/api/photo-carousel/favorites', newFavorite)
       .then(this.loadFavorites(this.state.user))
       .then(this.setState({
@@ -63,7 +65,7 @@ class Favorites extends React.Component {
 
   updateFavorite(event, fav) {
     event.preventDefault();
-    let listingId = parseInt(window.location.pathname.substring(20));
+    const listingId = window.location.pathname.split('/')[1];
     let newFavList = fav.favoriteLists;
     if (event.target.id === 'heart') {
       newFavList = newFavList.filter((listing) => (Number(listing) !== Number(listingId)));
@@ -84,14 +86,14 @@ class Favorites extends React.Component {
 
   render() {
     function isFavorite(favoriteList) {
-      let listingId = parseInt(window.location.pathname.substring(20));
-      let isFavorite = false;
-      for (var i = 0; i < favoriteList.length; i++) {
+      const listingId = window.location.pathname.split('/')[1];
+      let isOnFavoritesList = false;
+      for (let i = 0; i < favoriteList.length; i += 1) {
         if (favoriteList[i] === listingId) {
-          isFavorite = true;
+          isOnFavoritesList = true;
         }
       }
-      return isFavorite;
+      return isOnFavoritesList;
     }
     return (
       <FavoritesWrapper>
@@ -114,7 +116,7 @@ class Favorites extends React.Component {
               {this.state.favorites.map((fav) => (
                 <StyledFav key={fav._id}>
                   <ImageAndText>
-                    <S.FavoritesButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/AddFav.png" />
+                    <S.FavoritesButtonImage src={fav.favoritePicture} />
                     {fav.listName}
                   </ImageAndText>
                   {isFavorite(fav.favoriteLists)
@@ -153,7 +155,7 @@ const fadeIn = keyframes`
 `;
 
 const FavoritesWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: flex-end;
   left: 0px;
@@ -232,7 +234,7 @@ const GrayLine = styled.hr`
 `;
 
 const InnerModal = styled.div`
-  max-width: 75%;
+  min-width: 30%;
   max-height: 500px;
   background-color: white;
   padding: 40px;

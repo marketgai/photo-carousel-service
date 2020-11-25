@@ -77,6 +77,18 @@ const fadeIn = keyframes`
   }
 `;
 
+const fadeOut = keyframes`
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1
+  }
+`;
+
 const smallerOnClick = keyframes`
   100% {
     width: 40px;
