@@ -55,6 +55,7 @@ class Favorites extends React.Component {
 
     axios.post('/api/photo-carousel/favorites', newFavorite)
       .then(this.loadFavorites(this.state.user))
+      .then(() => {this.props.checkFavorite()})
       .then(this.setState({
         newListText: '',
       }))
