@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TitleBar = ({listingName, listingStars, listingNumReviews, listingLocation, toggleFavorites}) => (
+const TitleBar = ({ listingName, listingStars, listingNumReviews, listingLocation, toggleFavorites, isFavorite }) => (
   <TitleWrapper>
     <Title>{listingName}</Title>
     <InfoBar>
@@ -17,12 +17,13 @@ const TitleBar = ({listingName, listingStars, listingNumReviews, listingLocation
         </Reviews>
       </LeftRow>
       <TopRightButtons>
-        <Button onClick={() => console.log('share')}>
+        <Button>
           <ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
           Share
         </Button>
         <Button onClick={toggleFavorites}>
-          <ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Heart.png" />
+          {isFavorite ? <HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" id="heart" />
+          : <HeartImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" id="no-heart" />}
           Save
         </Button>
       </TopRightButtons>
@@ -73,6 +74,15 @@ const InfoBar = styled.div`
 
 const LeftRow = styled.div`
 
+`;
+
+const HeartImage = styled.img`
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  user-select: none;
+  cursor: pointer;
+  padding-right: 7px;
 `;
 
 const TopRightButtons = styled.div`

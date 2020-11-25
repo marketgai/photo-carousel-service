@@ -23,6 +23,7 @@ class App extends React.Component {
       listingStars: null,
       listingNumReviews: null,
       listingLocation: null,
+      isFavorite: false,
     };
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
     this.toggleCarousel = this.toggleCarousel.bind(this);
@@ -31,11 +32,13 @@ class App extends React.Component {
     this.toggleMosaic = this.toggleMosaic.bind(this);
     this.switchCarouselMosaic = this.switchCarouselMosaic.bind(this);
     this.toggleFavorites = this.toggleFavorites.bind(this);
+    this.checkFavorite = this.checkFavorite.bind(this);
   }
 
   componentDidMount() {
     const id = window.location.pathname.split('/')[1];
     this.loadListingPhotos(id);
+    this.checkFavorite();
   }
 
   loadListingPhotos(id) {
@@ -124,8 +127,32 @@ class App extends React.Component {
     });
   }
 
+  checkFavorite() {
+    axios.get(`/api/photo-carousel/favorites/1`)
+      .then((results) => {
+        console.log('checking');
+        let isFavorite = false;
+        const favorites = results.data;
+        for (let i = 0; i < favorites.length; i++) {
+          favorites[i].favoriteLists.forEach((fav) => {
+            //if this listing is on the favorites list
+            if (fav === Number(window.location.pathname.split('/')[1])) {
+              //set isFavorite = true;
+              isFavorite = true;
+            }
+          })
+        }
+        this.setState({
+          isFavorite: isFavorite,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
-    const { showCarousel, carouselPhotos, showMosaic, showFavorites, listingName, listingStars, listingNumReviews, listingLocation} = this.state;
+    const { showCarousel, carouselPhotos, showMosaic, showFavorites, listingName, listingStars, listingNumReviews, listingLocation, isFavorite} = this.state;
     return (
       <div>
         {showMosaic && <Mosaic
@@ -148,6 +175,7 @@ class App extends React.Component {
           listingNumReviews={listingNumReviews}
           listingLocation={listingLocation}
           toggleFavorites={this.toggleFavorites}
+          isFavorite={isFavorite}
         />
         <Gallery
           carouselPhotos={carouselPhotos}
@@ -159,7 +187,11 @@ class App extends React.Component {
           <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
           Show all photos
         </S.ShowAllPhotos>
-        {showFavorites && <Favorites toggleFavorites={this.toggleFavorites} mainPic={this.state.carouselPhotos[0].photo} />}
+        {showFavorites && <Favorites
+          toggleFavorites={this.toggleFavorites}
+          mainPic={this.state.carouselPhotos[0].photo}
+          checkFavorite={this.checkFavorite}
+        />}
       </div>
     );
   }

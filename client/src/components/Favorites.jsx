@@ -45,7 +45,7 @@ class Favorites extends React.Component {
     if (newListName === '') {
       return;
     }
-    const listingId = window.location.pathname.split('/')[1];
+    const listingId = Number(window.location.pathname.split('/')[1]);
     const newFavorite = {
       userId: this.state.user,
       listName: newListName,
@@ -65,7 +65,7 @@ class Favorites extends React.Component {
 
   updateFavorite(event, fav) {
     event.preventDefault();
-    const listingId = window.location.pathname.split('/')[1];
+    const listingId = Number(window.location.pathname.split('/')[1]);
     let newFavList = fav.favoriteLists;
     if (event.target.id === 'heart') {
       newFavList = newFavList.filter((listing) => (Number(listing) !== Number(listingId)));
@@ -79,6 +79,7 @@ class Favorites extends React.Component {
     };
     axios.put('/api/photo-carousel/favorites', updatedFavorite)
       .then(this.loadFavorites(this.state.user))
+      .then(() => {this.props.checkFavorite()})
       .catch((error) => {
         console.error(error);
       });
@@ -86,7 +87,7 @@ class Favorites extends React.Component {
 
   render() {
     function isFavorite(favoriteList) {
-      const listingId = window.location.pathname.split('/')[1];
+      const listingId = Number(window.location.pathname.split('/')[1]);
       let isOnFavoritesList = false;
       for (let i = 0; i < favoriteList.length; i += 1) {
         if (favoriteList[i] === listingId) {

@@ -116,6 +116,7 @@ const HeartImage = styled.img`
   width: 24px;
   background-color: transparent;
   user-select: none;
+  cursor: pointer;
 `;
 
 export default {
