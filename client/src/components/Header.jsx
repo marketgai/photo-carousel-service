@@ -5,13 +5,13 @@ const Header = () => (
   <div>
     <Banner>
       <BannerBoxLeft>
-        <img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/AILPUP.png" />
+        <img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/AILPUP.png" alt="ailpup logo" />
       </BannerBoxLeft>
       <BannerBox>
-        <img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/TitleBarMiddle.png" />
+        <img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/TitleBarMiddle.png" alt="searchbar" />
       </BannerBox>
       <BannerBoxRight>
-        <img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/TitleBarRIght.png" />
+        <img src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/TitleBarRIght.png" alt="userinfo" />
       </BannerBoxRight>
     </Banner>
     <UnderBar src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Bar.png" />
