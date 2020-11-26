@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import S from './StyledComponents.js';
 
 const Carousel = ({
   carousel,
@@ -17,22 +16,22 @@ const Carousel = ({
     <CarouselModal>
       <TopRow>
         <TopLeftButtons>
-          <S.Close onClick={toggleCarousel}>
-            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
+          <Close onClick={toggleCarousel}>
+            <ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image7.png" />
             Close
-          </S.Close>
-          <S.SwitchToMosaic onClick={switchCarouselMosaic}>
-            <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+          </Close>
+          <SwitchToMosaic onClick={switchCarouselMosaic}>
+            <ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
             Show all photos
-          </S.SwitchToMosaic>
+          </SwitchToMosaic>
         </TopLeftButtons>
         <TopRightButtons>
-          <S.RoundButton onClick={() => console.log('share')}>
-            <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
-          </S.RoundButton>
-          <S.RoundButton onClick={toggleFavorites}>
-            {isFavorite ? <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" /> : <S.SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" />}
-          </S.RoundButton>
+          <RoundButton onClick={() => console.log('share')}>
+            <SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image5.png" />
+          </RoundButton>
+          <RoundButton onClick={toggleFavorites}>
+            {isFavorite ? <SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/Heart.png" /> : <SmallButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/Icons+2.0/EmptyHeart.png" />}
+          </RoundButton>
         </TopRightButtons>
       </TopRow>
       <PageCounter>
@@ -131,8 +130,8 @@ const FocusImage = styled.img`
   margin: auto;
   margin-left: auto;
   margin-right: auto;
-  max-height: 80%;
-  max-width:80%;
+  max-height: 75%;
+  max-width: 80%;
   user-select: none;
 `;
 
@@ -219,6 +218,79 @@ const LeftButton = styled(DirectionButton)`
 
 const RightButton = styled(DirectionButton)`
   right: 3%;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  text-align: center;
+  width: auto;
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  text-decoration: underline;
+  padding: 7px;
+  margin: 2px;
+  background: white;
+  border-radius: 7px;
+  user-select: none;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+`;
+
+const RoundButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+`;
+
+const Close = styled(Button)`
+  text-decoration: none;
+  font-weight: 500;
+  width: auto;
+  border-radius: 7px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  background: rgb(230, 230, 230);
+  padding: 8px 10.5px;
+  margin-right: 20px;
+  user-select: none;
+  &:hover {
+    background: gray;
+  }
+`;
+
+const SwitchToMosaic = styled(Close)`
+  background: white;
+  border-color:black;
+  user-select: none;
+  padding: 8px 13px;
+  margin-right: 0px;
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+`;
+
+const ButtonImage = styled.img`
+  height: 12px;
+  width: 12px;
+  padding-right: 7px;
+  pointer-events: none;
+  user-select: none;
+`;
+
+const SmallButtonImage = styled(ButtonImage)`
+  height: 16px;
+  width: 16px;
+  padding: 0px;
 `;
 
 export default Carousel;
