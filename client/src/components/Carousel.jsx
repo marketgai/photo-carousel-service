@@ -1,12 +1,19 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import S from './StyledComponents.js';
 
 const Carousel = ({
-  carousel, toggleCarousel, moveIndexLeft, moveIndexRight, switchCarouselMosaic, toggleFavorites, isFavorite,
+  carousel,
+  toggleCarousel,
+  moveIndexLeft,
+  moveIndexRight,
+  switchCarouselMosaic,
+  toggleFavorites,
+  isFavorite,
 }) => (
-  <CarouselWrapper onScroll={() => console.log('scrolling')}>
+  <CarouselWrapper>
     <CarouselModal>
       <TopRow>
         <TopLeftButtons>
@@ -33,12 +40,28 @@ const Carousel = ({
         {' / '}
         {carousel.carouselPhotos.length}
       </PageCounter>
-      {Number(carousel.photoIndex) === 0 ? null : <LeftButton onClick={moveIndexLeft}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></LeftButton>}
+      {Number(carousel.photoIndex) === 0
+        ? null
+        : (
+          <LeftButton onClick={moveIndexLeft}>
+            <StyledSVG viewBox="0 0 32 32">
+              <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932" />
+            </StyledSVG>
+          </LeftButton>
+        )}
       <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
       {carousel.photoIndex >= carousel.carouselPhotos.length - 1
         ? null
-        : <RightButton onClick={moveIndexRight}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" /></g></StyledSVG></RightButton>}
-      <PhotoDescription>{carousel.carouselPhotos[carousel.photoIndex].description}</PhotoDescription>
+        : (
+          <RightButton onClick={moveIndexRight}>
+            <StyledSVG viewBox="0 0 32 32">
+              <path d="m12 4 11.2928932 11.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136l-11.2928932 11.2928932" />
+            </StyledSVG>
+          </RightButton>
+        )}
+      <PhotoDescription>
+        {carousel.carouselPhotos[carousel.photoIndex].description}
+      </PhotoDescription>
     </CarouselModal>
   </CarouselWrapper>
 );
