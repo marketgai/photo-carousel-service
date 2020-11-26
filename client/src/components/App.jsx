@@ -1,14 +1,15 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import Header from './Header.jsx';
 import TitleBar from './TitleBar.jsx';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
 import Mosaic from './Mosaic.jsx';
 import Favorites from './Favorites.jsx';
-import Header from './Header.jsx';
-import S from './StyledComponents.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,13 +26,14 @@ class App extends React.Component {
       listingLocation: null,
       isFavorite: false,
     };
+
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
+    this.toggleFavorites = this.toggleFavorites.bind(this);
     this.toggleCarousel = this.toggleCarousel.bind(this);
-    this.moveIndexLeft = this.moveIndexLeft.bind(this);
-    this.moveIndexRight = this.moveIndexRight.bind(this);
     this.toggleMosaic = this.toggleMosaic.bind(this);
     this.switchCarouselMosaic = this.switchCarouselMosaic.bind(this);
-    this.toggleFavorites = this.toggleFavorites.bind(this);
+    this.moveIndexLeft = this.moveIndexLeft.bind(this);
+    this.moveIndexRight = this.moveIndexRight.bind(this);
     this.checkFavorite = this.checkFavorite.bind(this);
   }
 
@@ -57,6 +59,15 @@ class App extends React.Component {
       });
   }
 
+  toggleFavorites(event) {
+    event.preventDefault();
+    const { showFavorites } = this.state;
+    const favoritesToggle = !showFavorites;
+    this.setState({
+      showFavorites: favoritesToggle,
+    });
+  }
+
   toggleCarousel(event) {
     event.preventDefault();
     const { showCarousel } = this.state;
@@ -73,25 +84,6 @@ class App extends React.Component {
     this.setState({
       showMosaic: mosaicToggle,
       photoIndex: index,
-    });
-  }
-
-  moveIndexLeft(event) {
-    event.preventDefault();
-    const { photoIndex } = this.state;
-    const leftIndex = photoIndex > 0 ? photoIndex - 1 : 0;
-    this.setState({
-      photoIndex: leftIndex,
-    });
-  }
-
-  moveIndexRight(event) {
-    event.preventDefault();
-    const { photoIndex, carouselPhotos } = this.state;
-    const rightIndex = photoIndex === carouselPhotos.length - 1
-      ? photoIndex : Number(photoIndex) + 1;
-    this.setState({
-      photoIndex: rightIndex,
     });
   }
 
@@ -118,32 +110,39 @@ class App extends React.Component {
     }
   }
 
-  toggleFavorites(event) {
+  moveIndexLeft(event) {
     event.preventDefault();
-    const { showFavorites } = this.state;
-    const favoritesToggle = !showFavorites;
+    const { photoIndex } = this.state;
+    const leftIndex = photoIndex > 0 ? photoIndex - 1 : 0;
     this.setState({
-      showFavorites: favoritesToggle,
+      photoIndex: leftIndex,
+    });
+  }
+
+  moveIndexRight(event) {
+    event.preventDefault();
+    const { photoIndex, carouselPhotos } = this.state;
+    const rightIndex = photoIndex === carouselPhotos.length - 1
+      ? photoIndex : Number(photoIndex) + 1;
+    this.setState({
+      photoIndex: rightIndex,
     });
   }
 
   checkFavorite() {
-    axios.get(`/api/photo-carousel/favorites/1`)
+    axios.get('/api/photo-carousel/favorites/1')
       .then((results) => {
-        console.log('checking');
         let isFavorite = false;
         const favorites = results.data;
-        for (let i = 0; i < favorites.length; i++) {
+        for (let i = 0; i < favorites.length; i += 1) {
           favorites[i].favoriteLists.forEach((fav) => {
-            //if this listing is on the favorites list
             if (fav === Number(window.location.pathname.split('/')[1])) {
-              //set isFavorite = true;
               isFavorite = true;
             }
-          })
+          });
         }
         this.setState({
-          isFavorite: isFavorite,
+          isFavorite,
         });
       })
       .catch((error) => {
@@ -152,24 +151,20 @@ class App extends React.Component {
   }
 
   render() {
-    const { showCarousel, carouselPhotos, showMosaic, showFavorites, listingName, listingStars, listingNumReviews, listingLocation, isFavorite} = this.state;
+    const {
+      showCarousel,
+      carouselPhotos,
+      showMosaic,
+      showFavorites,
+      listingName,
+      listingStars,
+      listingNumReviews,
+      listingLocation,
+      isFavorite,
+    } = this.state;
+
     return (
       <div>
-        {showMosaic && <Mosaic
-          photoCarousel={carouselPhotos}
-          toggleMosaic={this.toggleMosaic}
-          switchCarouselMosaic={this.switchCarouselMosaic}
-        />}
-        {showCarousel
-        && <Carousel
-          carousel={this.state}
-          toggleCarousel={this.toggleCarousel}
-          moveIndexLeft={this.moveIndexLeft}
-          moveIndexRight={this.moveIndexRight}
-          switchCarouselMosaic={this.switchCarouselMosaic}
-          toggleFavorites={this.toggleFavorites}
-          isFavorite={this.state.isFavorite}
-        />}
         <Header />
         <TitleBar
           listingName={listingName}
@@ -185,18 +180,73 @@ class App extends React.Component {
           height={100}
           width={100}
         />
-        <S.ShowAllPhotos onClick={this.toggleMosaic}>
-          <S.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+        <ShowAllPhotos onClick={this.toggleMosaic}>
+          <ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
           Show all photos
-        </S.ShowAllPhotos>
+        </ShowAllPhotos>
         {showFavorites && <Favorites
           toggleFavorites={this.toggleFavorites}
-          mainPic={this.state.carouselPhotos[0].photo}
+          mainPic={carouselPhotos[0].photo}
           checkFavorite={this.checkFavorite}
+        />}
+        {showMosaic && <Mosaic
+          photoCarousel={carouselPhotos}
+          toggleMosaic={this.toggleMosaic}
+          switchCarouselMosaic={this.switchCarouselMosaic}
+        />}
+        {showCarousel
+        && <Carousel
+          carousel={this.state}
+          toggleCarousel={this.toggleCarousel}
+          moveIndexLeft={this.moveIndexLeft}
+          moveIndexRight={this.moveIndexRight}
+          switchCarouselMosaic={this.switchCarouselMosaic}
+          toggleFavorites={this.toggleFavorites}
+          isFavorite={isFavorite}
         />}
       </div>
     );
   }
 }
+
+const ShowAllPhotos = styled.button`
+  cursor: pointer;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  padding: 7px;
+  margin: 2px;
+  text-decoration: none;
+  font-weight: 500;
+  width: auto;
+  border-radius: 7px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  background: rgb(230, 230, 230);
+  padding: 8px 10.5px;
+  margin-right: 20px;
+  position: absolute;
+  right: 13%;
+  background: white;
+  transform: translateY(-50px);
+  user-select: none;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+`;
+
+const ButtonImage = styled.img`
+  height: 12px;
+  width: 12px;
+  padding-right: 7px;
+  pointer-events: none;
+  user-select: none;
+`;
 
 export default App;

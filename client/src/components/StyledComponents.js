@@ -92,17 +92,6 @@ const SwitchToMosaic = styled(Close)`
   }
 `;
 
-const ShowAllPhotos = styled(Close)`
-  position: absolute;
-  right: 13%;
-  background: white;
-  transform: translateY(-50px);
-  user-select: none;
-  &:hover {
-    background: rgb(230, 230, 230);
-  }
-`;
-
 const TopRightButtons = styled.div`
   display: flex;
   justify-content: space-between;
