@@ -13,7 +13,7 @@
     "seed-data": "node seedData/updateDatabase.js",
     "coverage": "jest --collect-coverage",
     "test": "jest",
-    "build-dev": "webpack",
+    "build-dev": "webpack --watch",
     "start-dev": "nodemon server/index.js"
   },
   "dependencies": {
