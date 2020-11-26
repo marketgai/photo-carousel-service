@@ -31,20 +31,6 @@ const RoundButton = styled(Button)`
   border-radius: 50%;
 `;
 
-const ButtonImage = styled.img`
-  height: 12px;
-  width: 12px;
-  padding-right: 7px;
-  pointer-events: none;
-  user-select: none;
-`;
-
-const SmallButtonImage = styled(ButtonImage)`
-  height: 16px;
-  width: 16px;
-  padding: 0px;
-`;
-
 const LargeButtonImage = styled.img`
   height: 32px;
   width: 32px;
@@ -90,6 +76,52 @@ const SwitchToMosaic = styled(Close)`
   &:hover {
     background: rgb(230, 230, 230);
   }
+`;
+
+const ShowAllPhotos = styled.button`
+  cursor: pointer;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  padding: 7px;
+  margin: 2px;
+  text-decoration: none;
+  font-weight: 500;
+  width: auto;
+  border-radius: 7px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  background: rgb(230, 230, 230);
+  padding: 8px 10.5px;
+  margin-right: 20px;
+  position: absolute;
+  right: 13%;
+  background: white;
+  transform: translateY(-50px);
+  user-select: none;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    background: rgb(230, 230, 230);
+  }
+`;
+
+const ButtonImage = styled.img`
+  height: 12px;
+  width: 12px;
+  padding-right: 7px;
+  pointer-events: none;
+  user-select: none;
+`;
+
+const SmallButtonImage = styled(ButtonImage)`
+  height: 16px;
+  width: 16px;
+  padding: 0px;
 `;
 
 const TopRightButtons = styled.div`

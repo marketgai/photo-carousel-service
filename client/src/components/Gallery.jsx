@@ -2,22 +2,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Gallery = ({ carouselPhotos, toggleCarousel }) => {
-  let photoCount = 0;
-  return (
-    <div>
-      <GalleryStyled>
-        {carouselPhotos.map((image, index) => {
-          if (photoCount < 5) {
-            photoCount += 1;
-            return <Photo src={image.photo} key={image.id} id={index} onClick={toggleCarousel} />;
-          }
-          return null;
-        })}
-      </GalleryStyled>
-    </div>
-  );
-};
+const Gallery = ({ carouselPhotos, toggleCarousel }) => (
+  <div>
+    <GalleryStyled>
+      {carouselPhotos.map((image, index) => {
+        if (index < 5) {
+          return <Photo src={image.photo} key={image.id} id={index} onClick={toggleCarousel} />;
+        }
+        return null;
+      })}
+    </GalleryStyled>
+  </div>
+);
 
 const GalleryStyled = styled.div`
   display: grid;
@@ -40,11 +36,11 @@ const Photo = styled.img`
   cursor: pointer;
   overflow: hidden;
   user-select: none;
-  border-top-right-radius: ${props => props.id === 2 ? "12px" : null};
-  border-bottom-right-radius: ${props => props.id === 4 ? "12px" : null};
-  border-top-left-radius: ${props => props.id === 0 ? "12px" : null};
-  border-bottom-left-radius: ${props => props.id === 0 ? "12px" : null};
-  grid-area: ${props => props.id === 0 ? "span 2 / span 2" : "span 1 / span 1"};
+  border-top-right-radius: ${(props) => (props.id === 2 ? '12px' : null)};
+  border-bottom-right-radius: ${(props) => (props.id === 4 ? '12px' : null)};
+  border-top-left-radius: ${(props) => (props.id === 0 ? '12px' : null)};
+  border-bottom-left-radius: ${(props) => (props.id === 0 ? '12px' : null)};
+  grid-area: ${(props) => (props.id === 0 ? 'span 2 / span 2' : 'span 1 / span 1')};
   &:hover {
     opacity: 80%;
   }

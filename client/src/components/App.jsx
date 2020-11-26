@@ -3,13 +3,13 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 import Header from './Header.jsx';
 import TitleBar from './TitleBar.jsx';
 import Gallery from './Gallery.jsx';
 import Carousel from './Carousel.jsx';
 import Mosaic from './Mosaic.jsx';
 import Favorites from './Favorites.jsx';
+import Style from './StyledComponents.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -180,10 +180,10 @@ class App extends React.Component {
           height={100}
           width={100}
         />
-        <ShowAllPhotos onClick={this.toggleMosaic}>
-          <ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
+        <Style.ShowAllPhotos onClick={this.toggleMosaic}>
+          <Style.ButtonImage src="https://s3-us-west-1.amazonaws.com/fec.home.images/Icons+and+Buttons/image25.png" />
           Show all photos
-        </ShowAllPhotos>
+        </Style.ShowAllPhotos>
         {showFavorites && <Favorites
           toggleFavorites={this.toggleFavorites}
           mainPic={carouselPhotos[0].photo}
@@ -208,45 +208,5 @@ class App extends React.Component {
     );
   }
 }
-
-const ShowAllPhotos = styled.button`
-  cursor: pointer;
-  text-align: center;
-  font-family: sans-serif;
-  font-size: 14px;
-  line-height: 18px;
-  border: none;
-  padding: 7px;
-  margin: 2px;
-  text-decoration: none;
-  font-weight: 500;
-  width: auto;
-  border-radius: 7px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  background: rgb(230, 230, 230);
-  padding: 8px 10.5px;
-  margin-right: 20px;
-  position: absolute;
-  right: 13%;
-  background: white;
-  transform: translateY(-50px);
-  user-select: none;
-  &:focus {
-    outline: 0;
-  }
-  &:hover {
-    background: rgb(230, 230, 230);
-  }
-`;
-
-const ButtonImage = styled.img`
-  height: 12px;
-  width: 12px;
-  padding-right: 7px;
-  pointer-events: none;
-  user-select: none;
-`;
 
 export default App;
