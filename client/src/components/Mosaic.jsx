@@ -2,7 +2,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const generateMosaicChunk = (photos, switchCarouselMosaic) => {
+const generateMosaicChunks = (photos, switchCarouselMosaic) => {
   const photoCopies = photos.slice();
   let mosaic = [];
   let index = 0;
@@ -44,41 +44,17 @@ const generateMosaicChunk = (photos, switchCarouselMosaic) => {
 const Mosaic = ({ photoCarousel, toggleMosaic, switchCarouselMosaic }) => (
   <MosaicPositioning>
     <MosaicWrapper>
-      <CloseButton onClick={toggleMosaic}><StyledSVG viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false"><g fill="none"><path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/></g></StyledSVG></CloseButton>
+      <CloseButton onClick={toggleMosaic}>
+        <StyledSVG viewBox="0 0 32 32">
+          <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/>
+        </StyledSVG>
+      </CloseButton>
       <MosaicGrid>
-        {generateMosaicChunk(photoCarousel, switchCarouselMosaic)}
+        {generateMosaicChunks(photoCarousel, switchCarouselMosaic)}
       </MosaicGrid>
     </MosaicWrapper>
   </MosaicPositioning>
 );
-
-const SmallPhoto = styled.img`
-  object-fit: cover;
-  height: 100%;
-  min-height: 400px;
-  min-width: 200px;
-  width: 100%;
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    opacity: 80%;
-  }
-`;
-
-const LargePhoto = styled(SmallPhoto)`
-  grid-area: span 2 / span 2
-`;
-
-const StyledSVG = styled.svg`
-  display: block;
-  fill: none;
-  height: 12px;
-  width: 12px;
-  stroke: currentcolor;
-  stroke-width: 5.33333;
-  overflow: visible;"
-`;
 
 const slideUp = keyframes`
   0% {
@@ -133,20 +109,6 @@ const MosaicWrapper = styled.div`
   animation: 400ms ${slideUp} ease-in;
 `;
 
-const MosaicGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(auto-fill, 120px);
-  grid-row-gap: 1em;
-  grid-column-gap: 1em;
-  max-width: 55%;
-  margin: auto;
-  padding: 55px 100px;
-  z-index: 5;
-  user-select: none;
-  animation: 1000ms ${fadeIn} ease-in;
-`;
-
 const CloseButton = styled.div`
   position: fixed;
   height: 50px;
@@ -167,6 +129,48 @@ const CloseButton = styled.div`
   &:hover {
     background: rgba(34, 34, 34, 0.1)
   }
+`;
+
+const StyledSVG = styled.svg`
+  display: block;
+  fill: none;
+  height: 12px;
+  width: 12px;
+  stroke: currentcolor;
+  stroke-width: 5.33333;
+  overflow: visible;"
+`;
+
+const MosaicGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto-fill, 120px);
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
+  max-width: 55%;
+  margin: auto;
+  padding: 55px 100px;
+  z-index: 5;
+  user-select: none;
+  animation: 1000ms ${fadeIn} ease-in;
+`;
+
+const SmallPhoto = styled.img`
+  object-fit: cover;
+  height: 100%;
+  min-height: 400px;
+  min-width: 200px;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    opacity: 80%;
+  }
+`;
+
+const LargePhoto = styled(SmallPhoto)`
+  grid-area: span 2 / span 2
 `;
 
 export default Mosaic;
