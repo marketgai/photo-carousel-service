@@ -113,10 +113,11 @@ const CarouselWrapper = styled.div`
   width: 100%;
   z-index: 10;
   background-color: white;
+  animation: 200ms ${fadeIn} ease-out;
   animation: 200ms ${slideUp} ease-in;
   & .changing {
-    opacity: 0;
-    transition: 150ms;
+    opacity: 0.2;
+    transition: 100ms;
   }
 `;
 

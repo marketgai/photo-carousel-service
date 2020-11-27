@@ -42,7 +42,8 @@ const Photo = styled.img`
   border-bottom-left-radius: ${(props) => (props.id === 0 ? '12px' : null)};
   grid-area: ${(props) => (props.id === 0 ? 'span 2 / span 2' : 'span 1 / span 1')};
   &:hover {
-    opacity: 80%;
+    filter: brightness(0.8);
+    transition: 200ms ease-out;
   }
 `;
 

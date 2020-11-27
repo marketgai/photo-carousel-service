@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Header from './Header.jsx';
 import TitleBar from './TitleBar.jsx';
 import Gallery from './Gallery.jsx';
@@ -26,6 +26,7 @@ class App extends React.Component {
       listingLocation: null,
       isFavorite: false,
       isChanging: false,
+      isRevealing: false,
     };
 
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
@@ -37,6 +38,7 @@ class App extends React.Component {
     this.moveIndexRight = this.moveIndexRight.bind(this);
     this.checkFavorite = this.checkFavorite.bind(this);
     this.fadeImageIn = this.fadeImageIn.bind(this);
+    this.toggleRevealFalse = this.toggleRevealFalse.bind(this);
   }
 
   componentDidMount() {
@@ -74,19 +76,41 @@ class App extends React.Component {
     event.preventDefault();
     const { showCarousel } = this.state;
     const carouselToggle = !showCarousel;
-    this.setState({
-      showCarousel: carouselToggle,
-      photoIndex: event.target.id,
-    });
+    if (showCarousel) {
+      this.setState({
+        showCarousel: carouselToggle,
+        photoIndex: event.target.id,
+        isRevealing: true,
+      }, () => { this.toggleRevealFalse(); });
+    } else {
+      this.setState({
+        showCarousel: carouselToggle,
+        photoIndex: event.target.id,
+      });
+    }
   }
 
   toggleMosaic(index) {
     const { showMosaic } = this.state;
     const mosaicToggle = !showMosaic;
-    this.setState({
-      showMosaic: mosaicToggle,
-      photoIndex: index,
-    });
+    if (showMosaic) {
+      this.setState({
+        showMosaic: mosaicToggle,
+        photoIndex: index,
+        isRevealing: true,
+      }, () => { this.toggleRevealFalse(); });
+    } else {
+      this.setState({
+        showMosaic: mosaicToggle,
+        photoIndex: index,
+      });
+    }
+  }
+
+  toggleRevealFalse() {
+    return setTimeout(this.setState.bind((this), {
+      isRevealing: false,
+    }), 300);
   }
 
   switchCarouselMosaic(event) {
@@ -135,7 +159,7 @@ class App extends React.Component {
     return setTimeout(this.setState.bind((this), {
       photoIndex: index,
       isChanging: false,
-    }), 150);
+    }), 100);
   }
 
   triggerPhotoChange() {
@@ -178,6 +202,7 @@ class App extends React.Component {
       listingNumReviews,
       listingLocation,
       isFavorite,
+      isRevealing,
     } = this.state;
 
     return (
@@ -210,6 +235,7 @@ class App extends React.Component {
           photoCarousel={carouselPhotos}
           toggleMosaic={this.toggleMosaic}
           switchCarouselMosaic={this.switchCarouselMosaic}
+          isClosing={this.state.isClosing}
         />}
         {showCarousel
         && <Carousel
@@ -222,6 +248,7 @@ class App extends React.Component {
           isFavorite={isFavorite}
           isChanging={this.state.isChanging}
         />}
+        {isRevealing && <SlideDownReveal />}
       </div>
     );
   }
@@ -265,6 +292,31 @@ const ButtonImage = styled.img`
   padding-right: 7px;
   pointer-events: none;
   user-select: none;
+`;
+
+const slideDown = keyframes`
+  0% {
+    height: 100%;
+    opacity: 1;
+    z-index: 1000;
+  }
+  100% {
+    height: 0px;
+    opacity: 0;
+    z-index: -1;
+  }
+`;
+
+const SlideDownReveal = styled.div`
+  position: fixed;
+  background-color: white;
+  bottom: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100vw;
+  user-select: none;
+  z-index: -1;
+  animation: 300ms ${slideDown} ease-out;
 `;
 
 export default App;

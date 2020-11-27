@@ -46,7 +46,7 @@ const Mosaic = ({ photoCarousel, toggleMosaic, switchCarouselMosaic }) => (
     <MosaicWrapper>
       <CloseButton onClick={toggleMosaic}>
         <StyledSVG viewBox="0 0 32 32">
-          <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/>
+          <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932" />
         </StyledSVG>
       </CloseButton>
       <MosaicGrid>
@@ -91,6 +91,7 @@ const MosaicPositioning = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 5;
+  animation: 200ms ${fadeIn} ease-out;
   animation: 400ms ${slideUp} ease-in;
 `;
 
@@ -163,9 +164,9 @@ const SmallPhoto = styled.img`
   width: 100%;
   cursor: pointer;
   user-select: none;
-
   &:hover {
-    opacity: 80%;
+    filter: brightness(0.8);
+    transition: 200ms ease-out;
   }
 `;
 
