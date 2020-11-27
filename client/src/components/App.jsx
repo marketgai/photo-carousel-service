@@ -25,6 +25,7 @@ class App extends React.Component {
       listingNumReviews: null,
       listingLocation: null,
       isFavorite: false,
+      isChanging: false,
     };
 
     this.loadListingPhotos = this.loadListingPhotos.bind(this);
@@ -35,6 +36,7 @@ class App extends React.Component {
     this.moveIndexLeft = this.moveIndexLeft.bind(this);
     this.moveIndexRight = this.moveIndexRight.bind(this);
     this.checkFavorite = this.checkFavorite.bind(this);
+    this.fadeImageIn = this.fadeImageIn.bind(this);
   }
 
   componentDidMount() {
@@ -97,7 +99,7 @@ class App extends React.Component {
         this.setState({
           showCarousel: false,
         });
-      }, 250));
+      }, 300));
     } else {
       this.setState({
         showCarousel: true,
@@ -106,7 +108,7 @@ class App extends React.Component {
         this.setState({
           showMosaic: false,
         });
-      }, 250));
+      }, 300));
     }
   }
 
@@ -115,8 +117,8 @@ class App extends React.Component {
     const { photoIndex } = this.state;
     const leftIndex = photoIndex > 0 ? photoIndex - 1 : 0;
     this.setState({
-      photoIndex: leftIndex,
-    });
+      isChanging: true,
+    }, () => this.fadeImageIn(leftIndex));
   }
 
   moveIndexRight(event) {
@@ -125,8 +127,23 @@ class App extends React.Component {
     const rightIndex = photoIndex === carouselPhotos.length - 1
       ? photoIndex : Number(photoIndex) + 1;
     this.setState({
-      photoIndex: rightIndex,
-    });
+      isChanging: true,
+    }, () => this.fadeImageIn(rightIndex));
+  }
+
+  fadeImageIn(index) {
+    return setTimeout(this.setState.bind((this), {
+      photoIndex: index,
+      isChanging: false,
+    }), 150);
+  }
+
+  triggerPhotoChange() {
+    return () => setTimeout(() => {
+      this.setState({
+        isChanging: false,
+      });
+    }, 100);
   }
 
   checkFavorite() {
@@ -203,6 +220,7 @@ class App extends React.Component {
           switchCarouselMosaic={this.switchCarouselMosaic}
           toggleFavorites={this.toggleFavorites}
           isFavorite={isFavorite}
+          isChanging={this.state.isChanging}
         />}
       </div>
     );

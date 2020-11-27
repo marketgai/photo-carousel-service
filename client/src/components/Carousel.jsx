@@ -11,6 +11,7 @@ const Carousel = ({
   switchCarouselMosaic,
   toggleFavorites,
   isFavorite,
+  isChanging,
 }) => (
   <CarouselWrapper>
     <CarouselModal>
@@ -48,7 +49,7 @@ const Carousel = ({
             </StyledSVG>
           </LeftButton>
         )}
-      <FocusImage className="test" src={carousel.carouselPhotos[carousel.photoIndex].photo} />
+      <FocusImage className={isChanging && 'changing'} src={carousel.carouselPhotos[carousel.photoIndex].photo} />
       {carousel.photoIndex >= carousel.carouselPhotos.length - 1
         ? null
         : (
@@ -113,6 +114,10 @@ const CarouselWrapper = styled.div`
   z-index: 10;
   background-color: white;
   animation: 200ms ${slideUp} ease-in;
+  & .changing {
+    opacity: 0;
+    transition: 150ms;
+  }
 `;
 
 const CarouselModal = styled.div`
@@ -133,6 +138,7 @@ const FocusImage = styled.img`
   max-height: 75%;
   max-width: 80%;
   user-select: none;
+  transition: 150ms;
 `;
 
 const PageCounter = styled.div`
