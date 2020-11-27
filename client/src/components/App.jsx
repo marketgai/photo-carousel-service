@@ -40,6 +40,7 @@ class App extends React.Component {
     this.checkFavorite = this.checkFavorite.bind(this);
     this.fadeImageIn = this.fadeImageIn.bind(this);
     this.toggleRevealFalse = this.toggleRevealFalse.bind(this);
+    this.removeFavoritesBackground = this.removeFavoritesBackground.bind(this);
   }
 
   componentDidMount() {
@@ -68,9 +69,22 @@ class App extends React.Component {
     event.preventDefault();
     const { showFavorites } = this.state;
     const favoritesToggle = !showFavorites;
-    this.setState({
-      showFavorites: favoritesToggle,
-    });
+    if (this.state.showFavorites) {
+      this.setState({
+        isFavoriteClosing: true,
+      }, () => this.removeFavoritesBackground());
+    } else {
+      this.setState({
+        showFavorites: favoritesToggle,
+      });
+    }
+  }
+
+  removeFavoritesBackground() {
+    return setTimeout(this.setState.bind((this), {
+      showFavorites: false,
+      isFavoriteClosing: false,
+    }), 200);
   }
 
   toggleCarousel(event) {

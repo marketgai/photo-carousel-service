@@ -113,7 +113,7 @@ class Favorites extends React.Component {
     return (
       <FavoritesWrapper>
         <FavoritesModal>
-          <InnerModal>
+          <InnerModal className={this.props.isFavoriteClosing && 'slideDown'}>
             <TopRow>
               <CloseButton onClick={this.props.toggleFavorites} viewBox="0 0 32 32">
                 <path d="m6 6 20 20" />
@@ -206,6 +206,11 @@ const FavoritesWrapper = styled.div`
   z-index: 800;
   bottom: 0px;
   animation: 200ms ${fadeIn} ease-in;
+
+  & .slideDown {
+    transform: translateY(100vh);
+    transition: 300ms;
+  }
 `;
 
 const FavoritesModal = styled.div`
