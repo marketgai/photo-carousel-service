@@ -25,6 +25,7 @@ class App extends React.Component {
       listingNumReviews: null,
       listingLocation: null,
       isFavorite: false,
+      isFavoriteClosing: false,
       isChanging: false,
       isRevealing: false,
     };
@@ -167,7 +168,7 @@ class App extends React.Component {
       this.setState({
         isChanging: false,
       });
-    }, 100);
+    }, 150);
   }
 
   checkFavorite() {
@@ -202,7 +203,10 @@ class App extends React.Component {
       listingNumReviews,
       listingLocation,
       isFavorite,
+      isFavoriteClosing,
       isRevealing,
+      isChanging,
+      isClosing,
     } = this.state;
 
     return (
@@ -230,12 +234,13 @@ class App extends React.Component {
           toggleFavorites={this.toggleFavorites}
           mainPic={carouselPhotos[0].photo}
           checkFavorite={this.checkFavorite}
+          isFavoriteClosing={isFavoriteClosing}
         />}
         {showMosaic && <Mosaic
           photoCarousel={carouselPhotos}
           toggleMosaic={this.toggleMosaic}
           switchCarouselMosaic={this.switchCarouselMosaic}
-          isClosing={this.state.isClosing}
+          isClosing={isClosing}
         />}
         {showCarousel
         && <Carousel
@@ -246,7 +251,7 @@ class App extends React.Component {
           switchCarouselMosaic={this.switchCarouselMosaic}
           toggleFavorites={this.toggleFavorites}
           isFavorite={isFavorite}
-          isChanging={this.state.isChanging}
+          isChanging={isChanging}
         />}
         {isRevealing && <SlideDownReveal />}
       </div>
