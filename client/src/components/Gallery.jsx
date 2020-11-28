@@ -20,8 +20,7 @@ const GalleryStyled = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: auto;
-  width: 80%;
-  min-width: 500px;
+  width: 70%;
   height: 100%;
   min-height: 500px;
   grid-gap: 8px;

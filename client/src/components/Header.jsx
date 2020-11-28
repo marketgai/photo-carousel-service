@@ -22,9 +22,11 @@ const Banner = styled.div`
   margin: auto;
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 70%;
   min-width: 500px;
   height: auto;
+  pointer-events: none;
+  user-select: none;
 `;
 
 const BannerBox = styled.div`
@@ -43,7 +45,9 @@ const BannerBoxRight = styled(BannerBox)`
 `;
 
 const UnderBar = styled.img`
-  width: 100%
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
 `;
 
 export default Header;

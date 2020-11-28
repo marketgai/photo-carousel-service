@@ -109,7 +109,7 @@ const images = [
   'photo-1539922980492-38f6673af8dd_optimized.jpg',
   'photo-1538944570562-2c9cb7857097_optimized.jpg',
   'photo-1538944495092-48fff71fbb0c_optimized.jpg',
-  'photo-1537726235470-8504e3beef77.jpeg',
+  'photo-1537726235470-8504e3beef77_optimized.jpeg',
   'photo-1533008093099-e2681382639a_optimized.jpg',
   'photo-1532323544230-7191fd51bc1b_optimized.jpg',
   'photo-1531829039722-d3fb3e705a4b_optimized.jpg',

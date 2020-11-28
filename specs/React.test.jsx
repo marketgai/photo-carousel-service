@@ -31,20 +31,19 @@ describe('App Component Test Suite', function() {
   })
 
   it(`mosaic modal loads correct number of pictures on load`, () => {
-    //One img tag on page, so each number should be +1
     const wrapper12 = mount(<App />).setState(data.state12).setState({showMosaic: true});
-    expect(wrapper12.find(Mosaic).find('img').length).toEqual(13);
+    expect(wrapper12.find(Mosaic).find('img').length).toEqual(12);
 
     const wrapper8 = mount(<App />).setState(data.state8).setState({showMosaic: true});
-    expect(wrapper8.find(Mosaic).find('img').length).toEqual(9);
+    expect(wrapper8.find(Mosaic).find('img').length).toEqual(8);
 
     const wrapper7 = mount(<App />).setState(data.state7).setState({showMosaic: true});
-    expect(wrapper7.find(Mosaic).find('img').length).toEqual(8);
+    expect(wrapper7.find(Mosaic).find('img').length).toEqual(7);
   })
 
   it(`carousel modal only loads one image on load`, () => {
-    //Five img tag on page, so each number should be +5
+    //Four img tag on page, so each number should be +4
     const wrapper12 = mount(<App />).setState(data.state12).setState({showCarousel: true});
-    expect(wrapper12.find(Carousel).find('img').length).toEqual(6);
+    expect(wrapper12.find(Carousel).find('img').length).toEqual(5);
   })
 });

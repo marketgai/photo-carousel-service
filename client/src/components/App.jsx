@@ -295,7 +295,7 @@ const ShowAllPhotos = styled.button`
   padding: 8px 10.5px;
   margin-right: 20px;
   position: absolute;
-  right: 13%;
+  right: 17%;
   background: white;
   transform: translateY(-50px);
   user-select: none;

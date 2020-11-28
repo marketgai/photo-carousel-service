@@ -42,7 +42,7 @@ const TitleBar = ({
 const TitleWrapper = styled.div`
   height: 62px;
   width: 100%;
-  width: 80%;
+  width: 70%;
   min-width: 500px;
   margin: auto;
 `;
