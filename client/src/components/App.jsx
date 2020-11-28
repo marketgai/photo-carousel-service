@@ -223,6 +223,10 @@ class App extends React.Component {
       isClosing,
     } = this.state;
 
+    showMosaic ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'scroll';
+    showCarousel ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'scroll';
+    showFavorites ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'scroll';
+
     return (
       <div>
         <Header />

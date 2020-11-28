@@ -110,6 +110,7 @@ class Favorites extends React.Component {
       }
       return isOnFavoritesList;
     }
+
     return (
       <FavoritesWrapper>
         <FavoritesModal>
