@@ -109,15 +109,15 @@ const smallerOnClick = keyframes`
 const CarouselWrapper = styled.div`
   position: fixed;
   bottom: 0px;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   z-index: 10;
   background-color: white;
   animation: 200ms ${fadeIn} ease-out;
   animation: 200ms ${slideUp} ease-in;
   & .changing {
-    opacity: 0.2;
-    transition: 100ms;
+    opacity: 0;
+    transition: 150ms;
   }
 `;
 
@@ -139,7 +139,7 @@ const FocusImage = styled.img`
   max-height: 75%;
   max-width: 80%;
   user-select: none;
-  transition: 150ms;
+  transition: 250ms;
 `;
 
 const PageCounter = styled.div`

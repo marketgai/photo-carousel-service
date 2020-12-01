@@ -38,9 +38,10 @@ class App extends React.Component {
     this.moveIndexLeft = this.moveIndexLeft.bind(this);
     this.moveIndexRight = this.moveIndexRight.bind(this);
     this.checkFavorite = this.checkFavorite.bind(this);
-    this.fadeImageIn = this.fadeImageIn.bind(this);
+    this.changeIndex = this.changeIndex.bind(this);
     this.toggleRevealFalse = this.toggleRevealFalse.bind(this);
     this.removeFavoritesBackground = this.removeFavoritesBackground.bind(this);
+    this.fadeImageIn = this.fadeImageIn.bind(this);
   }
 
   componentDidMount() {
@@ -157,7 +158,7 @@ class App extends React.Component {
     const leftIndex = photoIndex > 0 ? photoIndex - 1 : 0;
     this.setState({
       isChanging: true,
-    }, () => this.fadeImageIn(leftIndex));
+    }, () => this.changeIndex(leftIndex));
   }
 
   moveIndexRight(event) {
@@ -167,22 +168,19 @@ class App extends React.Component {
       ? photoIndex : Number(photoIndex) + 1;
     this.setState({
       isChanging: true,
-    }, () => this.fadeImageIn(rightIndex));
+    }, () => this.changeIndex(rightIndex));
   }
 
-  fadeImageIn(index) {
+  changeIndex(index) {
     return setTimeout(this.setState.bind((this), {
       photoIndex: index,
-      isChanging: false,
-    }), 100);
+    }, () => this.fadeImageIn()), 155);
   }
 
-  triggerPhotoChange() {
-    return () => setTimeout(() => {
-      this.setState({
-        isChanging: false,
-      });
-    }, 150);
+  fadeImageIn() {
+    return setTimeout(this.setState.bind((this), {
+      isChanging: false,
+    }), 100);
   }
 
   checkFavorite() {
