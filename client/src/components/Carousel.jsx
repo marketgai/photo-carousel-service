@@ -139,7 +139,7 @@ const FocusImage = styled.img`
   max-height: 75%;
   max-width: 80%;
   user-select: none;
-  transition: 250ms;
+  transition: 150ms;
 `;
 
 const PageCounter = styled.div`

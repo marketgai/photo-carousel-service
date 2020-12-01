@@ -5,12 +5,8 @@ import styled from 'styled-components';
 const Gallery = ({ carouselPhotos, toggleCarousel }) => (
   <div>
     <GalleryStyled>
-      {carouselPhotos.map((image, index) => {
-        if (index < 5) {
-          return <Photo src={image.photo} key={image.id} id={index} onClick={toggleCarousel} />;
-        }
-        return null;
-      })}
+      {carouselPhotos.map((image, index) =>
+        <Photo src={image.photo} key={image.id} id={index} onClick={toggleCarousel} />)}
     </GalleryStyled>
   </div>
 );
