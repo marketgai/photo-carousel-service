@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const database = require('../db/controller.js');
 
-const PORT = 3001;
+const PORT = 3333;
 const PATH = path.join(__dirname, '/../client/dist');
 const app = express();
 
