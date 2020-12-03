@@ -27,6 +27,46 @@ doc = {
   ]
 };
 
+schema = {
+  "rule": {
+    "type": "object",
+    "properties": {
+      "listingId": {
+        "type": "number",
+      },
+      "listingName": {
+        "type": "string",
+      },
+      "listingDescription": {
+        "type": "string"
+      },
+      "listingLocation": {
+        "type": "string"
+      },
+      "ListingStars": {
+        "type": "number"
+      },      "listingNumReviews": {
+        "type": "number"
+      },      "photos": {
+        "type": "array",
+        "properties": [
+            "type": "object",
+          "properties": {
+            "photoId": {
+              "type": "number",
+            },
+            "photoUrl": {
+              "type: "string"
+            }
+            }
+          ]
+      },
+    }
+  }
+}
+
+
+
 collection = db.collection('users');
 
 collection
