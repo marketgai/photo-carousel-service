@@ -1,7 +1,7 @@
 // db._dropDatabase("stayio");
 
-db._createDatabase('stayio');
-db._useDatabase('stayio');
+db._createDatabase('teststayio');
+db._useDatabase('teststayio');
 
 collection = db.collection('listings');
 
@@ -23,11 +23,12 @@ doc = {
     {
       photoId  : number,
       photoUrl : string
+      //photoDescription: string
     }
   ]
 };
 
-schema = {
+listingSchema = {
   rule : {
     type       : 'object',
     properties : {
@@ -80,16 +81,17 @@ collection
 doc = {
   userId   : number,
   userName : string,
+  //host: boolean
   lists    : [
     {
       listId    : number,
       listName  : string,
-      favorites : array
+      favorites : arrayoflistings
     }
   ]
 };
 
-schema = {
+userSchema = {
   rule : {
     type       : 'object',
     properties : {

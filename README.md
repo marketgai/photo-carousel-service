@@ -43,36 +43,56 @@ Stay.io
   **req.body - 'userID'**
 
   **response object** - an array of
-    ```
-    {
+    ```{
         "favoriteLists": [
             array of listing IDs
         ],
-        "_id": "mongo ID,
+        "listId": listId
         "userId": userID,
-        "listName": listName,
-        "favoritePicture": "https://s3-us-west-1.amazonaws.com/fec.home.images/Optimized/photo-1587023705100-8094f8d47e86_optimized.jpg",
-        "__v": 0
-    },
-    ```
+        "listName": listName
+    },```
+
+  **success - 200**
+1. ### POST - post new listing
+  **endpoint - '/api/photo-carousel/photos'**
+
+  **path params: photosUrl, userName, description, listingName, listingLocation**
+
+  **req.body - 'includes params above'**
+
+  **response - none**
 
   **success - 200**
 
 1. ### POST - post favorites
 
-  **endpoint - '/api/photo-carousel/favorites/'**
+  **endpoint - '/api/photo-carousel/favorites/:listId'**
 
-  **path params - listing ID**
+  **path params - listId, listing ID**
 
   ***response - none**
 
   **success- 200**
 
-1. ### PUT -  update favorite
+1. ### PATCH - update listing - add photo, edit description, etc
 
-  **endpoint - '/api/photo-carousel/favorites/'**
+  **endpoint - '/api/photo-carousel/photos/:listingId'**
 
-  **path params - listing ID**
+  **path params - photourl, description (whatever it is you're updating)**
+
+  **req.body - things in params above**
+
+  **response - none**
+
+  **success - 200**
+
+1. ### DELETE - delete listing
+
+  **endpoint - '/api/photo-carousel/photos/:listingId'**
+
+  **path params - listingID**
+
+  **req.body - listingID**
 
   **response - none**
 

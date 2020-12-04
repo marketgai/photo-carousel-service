@@ -15,16 +15,24 @@ CREATE TABLE stayio.listing (
 CREATE TABLE stayio.photos (
   photoId uuid NOT NULL PRIMARY KEY,
   listingId INT NOT NULL REFERENCES listing.listingId,
+  photoDescription VARCHAR (250),
   photoUrl VARCHAR(250) NOT NULL
 );
 
-CREATE TABLE stayio.favLists(
-  listId uuid NOT NULL PRIMARY KEY,
-  listName VARCHAR(100) NOT NULL,
-  order INT
+CREATE TABLE stayio.users (
+  userId uuid PRIMARY KEY,
+  userName VARCHAR(100),
+  host BOOLEAN
 );
 
-CREATE TABLE stayio.users (
-  userId uuid PRIMARY KEY
-  userName VARCHAR(100)
+CREATE TABLE stayio.userLists(
+  listId uuid NOT NULL PRIMARY KEY,
+  userId INT NOT NULL REFERENCES users.userId
+  listName VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE stayio.favListings (
+id uuid NOT NULL PRIMARY KEY,
+listId INT REFERENCES userLists.listId
+listingId INT REFERENCES listing.listingId
+)
