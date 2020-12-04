@@ -52,7 +52,7 @@ schema = {
       photos             : {
         type  : 'array',
         items : {
-          title      : 'photos',
+          title      : 'photo',
           type       : 'object',
           properties : {
             photoId  : {
@@ -112,8 +112,8 @@ schema = {
               type : 'string'
             },
             favorites : {
-              type : 'array',
-              fav  : {
+              type  : 'array',
+              items : {
                 type        : 'number',
                 description : 'listingId of favorite'
               }
