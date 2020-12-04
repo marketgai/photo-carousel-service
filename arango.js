@@ -28,44 +28,45 @@ doc = {
 };
 
 schema = {
-  "rule": {
-    "type": "object",
-    "properties": {
-      "listingId": {
-        "type": "number",
+  rule : {
+    type       : 'object',
+    properties : {
+      listingId          : {
+        type : 'number'
       },
-      "listingName": {
-        "type": "string",
+      listingName        : {
+        type : 'string'
       },
-      "listingDescription": {
-        "type": "string"
+      listingDescription : {
+        type : 'string'
       },
-      "listingLocation": {
-        "type": "string"
+      listingLocation    : {
+        type : 'string'
       },
-      "ListingStars": {
-        "type": "number"
-      },      "listingNumReviews": {
-        "type": "number"
-      },      "photos": {
-        "type": "array",
-        "properties": [
-            "type": "object",
-          "properties": {
-            "photoId": {
-              "type": "number",
+      ListingStars       : {
+        type : 'number'
+      },
+      listingNumReviews  : {
+        type : 'number'
+      },
+      photos             : {
+        type  : 'array',
+        items : {
+          title      : 'photos',
+          type       : 'object',
+          properties : {
+            photoId  : {
+              type : 'number'
             },
-            "photoUrl": {
-              "type: "string"
+            photoUrl : {
+              type : 'string'
             }
-            }
-          ]
-      },
+          }
+        }
+      }
     }
   }
-}
-
-
+};
 
 collection = db.collection('users');
 
@@ -86,4 +87,40 @@ doc = {
       favorites : array
     }
   ]
+};
+
+schema = {
+  rule : {
+    type       : 'object',
+    properties : {
+      userId   : {
+        type : 'number'
+      },
+      userName : {
+        type : 'string'
+      },
+      favLists : {
+        type : 'array',
+        list : {
+          title      : 'list',
+          type       : 'object',
+          properties : {
+            listId    : {
+              type : 'number'
+            },
+            listName  : {
+              type : 'string'
+            },
+            favorites : {
+              type : 'array',
+              fav  : {
+                type        : 'number',
+                description : 'listingId of favorite'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 };
