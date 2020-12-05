@@ -28,5 +28,8 @@ bundle.js
 photoCarousel.pem
 
 #CSV FILES
-
 *.csv
+
+#randomnumfiles
+
+db/pregenerated/

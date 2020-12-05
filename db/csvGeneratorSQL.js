@@ -1,11 +1,17 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const faker = require('faker');
+const randListing = require('./pregenerated/randNums');
 
 const writer = csvWriter();
 // const userWriter = csvWriter();
 
 //helper functions----------------------------------------------
+let lastIndex = 0;
+numFromArray = () => {
+  lastIndex += 1;
+  return randListing[lastIndex];
+};
 
 randInt = (n) => {
   return Math.floor(Math.random() * (n + 1));
@@ -76,7 +82,8 @@ createFavListings = () => {
   return favListing;
 };
 
-const DataGen = (i, name, createFunc, cb) => {
+const dataGen = (i, name, createFunc, cb) => {
+  const writer = csvWriter();
   writer.pipe(fs.createWriteStream(__dirname + `/csv/${name}.csv`));
 
   function write() {
@@ -100,6 +107,18 @@ const DataGen = (i, name, createFunc, cb) => {
   write();
 };
 
-DataGen(1000, 'listingsSQL', createListing, () => {
+const endCallback = () => {
+  writer.end();
+};
+
+dataGen(100, 'listingsSQL', createListing, () => {
   writer.end();
 });
+
+dataGen(100, 'usersSQL', createUser, endCallback);
+
+dataGen(100, 'photoSQL', createPhoto, endCallback);
+
+dataGen(100, 'userListSQL', createUserList, endCallback);
+
+dataGen(100, 'favListingsSQL', createFavListings, endCallback);

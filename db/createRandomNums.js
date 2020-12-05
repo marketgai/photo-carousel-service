@@ -12,7 +12,7 @@ const createRandomNumArrays = (n, max) => {
   return result;
 };
 
-const randArray = createRandomNumArrays(1000, 10000000);
+const randArray = createRandomNumArrays(1000000, 10000000);
 
 const storeArray = (data, path) => {
   try {
