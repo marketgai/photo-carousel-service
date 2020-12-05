@@ -27,7 +27,7 @@ photoGenerator = () => {
 
 createListing = () => {
   let document = {
-    listingId          : randInt(10),
+    listingId          : randInt(10000000),
     listingName        : faker.lorem.words(3),
     listingDescription : faker.lorem.sentence(),
     listingLocation    : faker.address.city() + ', ' + faker.address.stateAbbr(),
@@ -42,9 +42,9 @@ createListing = () => {
 
 createUser = () => {
   let document = {
-    userId    : randInt(10),
+    userId    : randInt(1000000),
     userName  : faker.random.float(1),
-    listId    : randInt(10),
+    listId    : randInt(1000000),
     listName  : faker.lorem.words(),
     favorites : randArrayOfNums(10)
   };
@@ -101,6 +101,6 @@ listingDataGen(10000000, () => {
   listingWriter.end();
 });
 
-userDataGen(10000000, () => {
+userDataGen(1000000, () => {
   userWriter.end();
 });

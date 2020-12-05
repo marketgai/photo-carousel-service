@@ -1,10 +1,5 @@
 const faker = require('faker');
 
-//write script to generate images from loremflicker
-//save images in specific naming convention
-//upload to aws
-
-//generate fake data with faker
 randInt = (n) => {
   return Math.floor(Math.random() * (n + 1));
 };
