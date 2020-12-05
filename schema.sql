@@ -21,8 +21,7 @@ CREATE TABLE stayio.photos (
 
 CREATE TABLE stayio.users (
   userId uuid PRIMARY KEY,
-  userName VARCHAR(100),
-  host BOOLEAN
+  userName VARCHAR(100)
 );
 
 CREATE TABLE stayio.userLists(

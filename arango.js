@@ -12,54 +12,54 @@ collection
     (err) => console.error('failed to create listings collection:', err)
   );
 
-doc = {
-  listingId          : number,
-  listingName        : string,
-  listingDescription : string,
-  listingLocation    : string,
-  listingStars       : number,
-  listingNumReviews  : number,
-  photos             : [
-    {
-      photoId  : number,
-      photoUrl : string
-      //photoDescription: string
-    }
-  ]
-};
+// doc = {
+//   listingId          : number,
+//   listingName        : string,
+//   listingDescription : string,
+//   listingLocation    : string,
+//   listingStars       : number,
+//   listingNumReviews  : number,
+//   photos             : [
+//     {
+//       photoId  : number,
+//       photoUrl : string,
+//       photoDescription: string
+//     }
+//   ]
+// };
 
 listingSchema = {
   rule : {
     type       : 'object',
     properties : {
-      listingId          : {
+      listingId         : {
         type : 'number'
       },
-      listingName        : {
+      listingName       : {
         type : 'string'
       },
-      listingDescription : {
+      listingLocation   : {
         type : 'string'
       },
-      listingLocation    : {
-        type : 'string'
-      },
-      ListingStars       : {
+      ListingStars      : {
         type : 'number'
       },
-      listingNumReviews  : {
+      listingNumReviews : {
         type : 'number'
       },
-      photos             : {
+      photos            : {
         type  : 'array',
         items : {
           title      : 'photo',
           type       : 'object',
           properties : {
-            photoId  : {
+            photoId          : {
               type : 'number'
             },
-            photoUrl : {
+            photoUrl         : {
+              type : 'string'
+            },
+            photoDescription : {
               type : 'string'
             }
           }
@@ -78,18 +78,18 @@ collection
     (err) => console.error('failed to create users collection:', err)
   );
 
-doc = {
-  userId   : number,
-  userName : string,
-  //host: boolean
-  lists    : [
-    {
-      listId    : number,
-      listName  : string,
-      favorites : arrayoflistings
-    }
-  ]
-};
+// doc = {
+//   userId   : number,
+//   userName : string,
+//   //host: boolean
+//   lists    : [
+//     {
+//       listId    : number,
+//       listName  : string,
+//       favorites : arrayoflistings
+//     }
+//   ]
+// };
 
 userSchema = {
   rule : {

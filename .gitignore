@@ -26,3 +26,6 @@ bundle.js
 
 #API KEYs
 photoCarousel.pem
+
+#CSV FILES
+*.csv
