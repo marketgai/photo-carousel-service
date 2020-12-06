@@ -1,16 +1,29 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const faker = require('faker');
-const randListing = require('./pregenerated/randNums');
+const milTenMil = require('./pregenerated/milTenMil');
+const milThousand = require('./pregenerated/milThousand');
 
 const writer = csvWriter();
 // const userWriter = csvWriter();
 
 //helper functions----------------------------------------------
 let lastIndex = 0;
-numFromArray = () => {
+randNumTenMil = () => {
+  if (lastIndex >= 1000000) {
+    lastIndex = randInt(10);
+  }
   lastIndex += 1;
-  return randListing[lastIndex];
+  return milTenMil[lastIndex];
+};
+
+let thouIndex = 0;
+randNumThousand = () => {
+  if (thouIndex >= 1000000) {
+    thouIndex = randInt(10);
+  }
+  thouIndex += 1;
+  return milTenMil[thouIndex];
 };
 
 randInt = (n) => {
@@ -19,16 +32,16 @@ randInt = (n) => {
 
 randomNumBetween = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-randArrayOfNums = (n) => {
+randArrayOfListings = () => {
   let result = [];
   for (var i = 0; i < randInt(10); i++) {
-    result.push(randInt(n));
+    result.push(randNumTenMil());
   }
   return result;
 };
 
 photoGenerator = () => {
-  return `https://stayio.s3-us-west-1.amazonaws.com/Airbnb_images/home${randInt(1000)}.jpg`;
+  return `https://stayio.s3-us-west-1.amazonaws.com/Airbnb_images/home${randNumThousand()}.jpg`;
 };
 
 createListing = () => {
@@ -38,7 +51,7 @@ createListing = () => {
     listingDescription : faker.lorem.sentence(),
     listingLocation    : faker.address.city() + ', ' + faker.address.stateAbbr(),
     listingStars       : faker.random.float(1),
-    listingNumReviews  : randInt(100000)
+    listingNumReviews  : randNumTenMil()
   };
   return listing;
 };
@@ -46,7 +59,7 @@ createListing = () => {
 createPhoto = () => {
   let photo = {
     // photoId: randInt(100000),
-    listingId        : randInt(10000000),
+    listingId        : randNumTenMil(),
     photoUrl         : photoGenerator(),
     photoDescription : faker.lorem.sentence()
   };
@@ -57,9 +70,9 @@ createUser = () => {
   let user = {
     // userId    : randInt(1000000),
     userName  : faker.random.float(1),
-    listId    : randInt(1000000),
+    listId    : randNumTenMil(),
     listName  : faker.lorem.words(),
-    favorites : randArrayOfNums(10)
+    favorites : randArrayOfListings()
   };
   return user;
 };
@@ -67,7 +80,7 @@ createUser = () => {
 createUserList = () => {
   let userList = {
     // listId:
-    userId   : randInt(1000000),
+    userId   : randNumTenMil(),
     listName : faker.lorem.words()
   };
   return userList;
@@ -76,21 +89,21 @@ createUserList = () => {
 createFavListings = () => {
   let favListing = {
     // favid
-    listId    : randInt(10000000),
-    listingId : randInt(10000000)
+    listId    : randNumTenMil(),
+    listingId : randNumTenMil()
   };
   return favListing;
 };
 
 const dataGen = (i, name, createFunc, cb) => {
-  const writer = csvWriter();
+  // const writer = csvWriter();
   writer.pipe(fs.createWriteStream(__dirname + `/csv/${name}.csv`));
 
   function write() {
     let ok = true;
     do {
       if (i % 1000000 === 0) {
-        console.log(i);
+        console.log(name, i);
       }
       i--;
       let newItem = createFunc();
@@ -111,14 +124,14 @@ const endCallback = () => {
   writer.end();
 };
 
-dataGen(100, 'listingsSQL', createListing, () => {
+dataGen(10000000, 'listingsSQL', createListing, () => {
   writer.end();
 });
 
-dataGen(100, 'usersSQL', createUser, endCallback);
+dataGen(1000000, 'usersSQL', createUser, endCallback);
 
-dataGen(100, 'photoSQL', createPhoto, endCallback);
+dataGen(40000000, 'photoSQL', createPhoto, endCallback);
 
-dataGen(100, 'userListSQL', createUserList, endCallback);
+dataGen(3000000, 'userListSQL', createUserList, endCallback);
 
-dataGen(100, 'favListingsSQL', createFavListings, endCallback);
+dataGen(5000000, 'favListingsSQL', createFavListings, endCallback);
