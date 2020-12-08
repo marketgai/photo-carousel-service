@@ -45,11 +45,10 @@ photoGenerator = () => {
 
 createListing = () => {
   let listing = {
-    // listingId          : 0,
-    listingName        : faker.lorem.words(3),
+    listingName        : faker.lorem.words(2),
     listingDescription : faker.lorem.sentence(),
     listingLocation    : faker.address.city(),
-    listingStars       : randInt(50)/10,
+    listingStars       : randNumThousand() / 200,
     listingNumReviews  : randNumThousand()
   };
   return listing;
@@ -57,17 +56,15 @@ createListing = () => {
 
 createPhoto = () => {
   let photo = {
-    // photoId          : 0,
     listingId        : randNumTenMil(),
+    photoDescription : faker.lorem.words(2),
     photoUrl         : photoGenerator(),
-    photoDescription : faker.lorem.sentence()
   };
   return photo;
 };
 
 createUser = () => {
   let user = {
-    // userId    : 0,
     userName  : faker.lorem.word()
   };
   return user;
@@ -75,9 +72,8 @@ createUser = () => {
 
 createUserList = () => {
   let userList = {
-    // listId   : 0,
     userId   : randNumTenMil(),
-    listName : faker.lorem.words()
+    listName : faker.lorem.word()
   };
   return userList;
 };
@@ -117,27 +113,27 @@ const dataGen = (i, name, createFunc, cb) => {
   write();
 };
 
-dataGen(100, 'listingsSQL', createListing, () => {
+dataGen(10000000, 'listingsSQL', createListing, () => {
   writer.end();
   console.timeEnd('listingsSQL');
 });
 
-dataGen(100, 'usersSQL', createUser, () => {
+dataGen(1000000, 'usersSQL', createUser, () => {
   writer.end();
   console.timeEnd('usersSQL');
 });
 
-dataGen(400, 'photosSQL', createPhoto, () => {
+dataGen(100000000, 'photosSQL', createPhoto, () => {
   writer.end();
   console.timeEnd('photosSQL');
 });
 
-dataGen(300, 'userListsSQL', createUserList, () => {
+dataGen(3000000, 'userListsSQL', createUserList, () => {
   writer.end();
   console.timeEnd('userListsSQL');
 });
 
-dataGen(500, 'favListingsSQL', createFavListings, () => {
+dataGen(10000000, 'favListingsSQL', createFavListings, () => {
   writer.end();
   console.timeEnd('favListingsSQL');
 });

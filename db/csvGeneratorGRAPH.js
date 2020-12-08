@@ -58,10 +58,10 @@ let favListNum = 1;
 createListing = () => {
   let listing = {
     _key          : listingNum,
-    listingName        : faker.lorem.words(3),
+    listingName        : faker.lorem.words(2),
     listingDescription : faker.lorem.sentence(),
     listingLocation    : faker.address.city() + ', ' + faker.address.stateAbbr(),
-    listingStars       : faker.random.float(1),
+    listingStars       : randNumThousand() / 200,
     listingNumReviews  : randNumTenMil(),
     photos: randArrayOfPhotos()
   };
@@ -82,9 +82,9 @@ createListing = () => {
 createUser = () => {
   let user = {
     _key   : userNum,
-    userName : faker.random.float(1),
+    userName : faker.lorem.word(),
     listId   : randNumTenMil(),
-    listName : faker.lorem.words()
+    listName : faker.lorem.words(2)
     // favorites : randArrayOfListings()
   };
   userNum++;
@@ -112,16 +112,16 @@ createFavList = () => {
 
 createOwnsEdge = () => {
   let ownsEdge = {
-    _from : 'user/' + randInt(10),
-    _to   : 'favList/' + randInt(100)
+    _from : 'user/' + randInt(1000000),
+    _to   : 'favList/' + randInt(3000000)
   };
   return ownsEdge;
 };
 
 createContainsEdge = () => {
   let containsEdge = {
-    _from : 'favList/' + randInt(100),
-    _to   : 'listing/' + randInt(100)
+    _from : 'favList/' + randInt(3000000),
+    _to   : 'listing/' + randInt(10000000)
   };
   return containsEdge;
 };
@@ -152,27 +152,27 @@ const dataGen = (i, name, createFunc, cb) => {
   write();
 };
 
-dataGen(100000, 'graphListing', createListing, () => {
+dataGen(10000000, 'graphListing', createListing, () => {
   writer.end();
   console.timeEnd('graphListing');
 });
 
-dataGen(100, 'graphUser', createUser, () => {
+dataGen(1000000, 'graphUser', createUser, () => {
   writer.end();
   console.timeEnd('graphUser');
 });
 
-dataGen(100000, 'graphOwnsEdge', createOwnsEdge, () => {
+dataGen(3000000, 'graphOwnsEdge', createOwnsEdge, () => {
   writer.end();
   console.timeEnd('graphOwnsEdge');
 });
 
-dataGen(1000, 'graphFavList', createFavList, () => {
+dataGen(3000000, 'graphFavList', createFavList, () => {
   writer.end();
   console.timeEnd('graphFavList');
 });
 
-dataGen(100000, 'graphContainsEdge', createContainsEdge, () => {
+dataGen(10000000, 'graphContainsEdge', createContainsEdge, () => {
   writer.end();
   console.timeEnd('graphContainsEdge');
 });
