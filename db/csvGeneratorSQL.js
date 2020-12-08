@@ -9,7 +9,7 @@ const writer = csvWriter();
 //helper functions----------------------------------------------
 let lastIndex = 0;
 randNumTenMil = () => {
-  if (lastIndex >= 1000000) {
+  if (lastIndex >= 999999) {
     lastIndex = randInt(10);
   }
   lastIndex += 1;
@@ -18,7 +18,7 @@ randNumTenMil = () => {
 
 let thouIndex = 0;
 randNumThousand = () => {
-  if (thouIndex >= 1000000) {
+  if (thouIndex >= 999999) {
     thouIndex = randInt(10);
   }
   thouIndex += 1;
@@ -47,7 +47,7 @@ createListing = () => {
   let listing = {
     listingName        : faker.lorem.words(2),
     listingDescription : faker.lorem.sentence(),
-    listingLocation    : faker.address.city(),
+    listingLocation    : `"${faker.address.city()}, ${faker.address.stateAbbr()}"`
     listingStars       : randNumThousand() / 200,
     listingNumReviews  : randNumThousand()
   };

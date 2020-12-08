@@ -25,12 +25,12 @@ Stay.io
 
     ```{
         "listingId": "Number,
-        "photo": "String",
         "description": "String" ,
         "listingName": "String",
         "listingStars": "Number,
         "listingNumReviews": "Number
         "listingLocation": "String",
+        "photos": "Array",
     },```
 
   **success - 200**

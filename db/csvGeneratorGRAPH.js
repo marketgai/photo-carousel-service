@@ -41,8 +41,8 @@ randomNumBetween = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
 randArrayOfPhotos = () => {
   let result = [];
-  for (var i = 0; i < randInt(10); i++) {
-    result.push(randNumTenMil());
+  for (var i = 0; i < randInt(20); i++) {
+    result.push(photoGenerator());
   }
   return result;
 }
@@ -63,7 +63,7 @@ createListing = () => {
     listingLocation    : faker.address.city() + ', ' + faker.address.stateAbbr(),
     listingStars       : randNumThousand() / 200,
     listingNumReviews  : randNumTenMil(),
-    photos: randArrayOfPhotos()
+    photos: {randArrayOfPhotos()}
   };
   listingNum++;
   return listing;

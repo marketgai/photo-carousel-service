@@ -1,0 +1,8 @@
+select listing from stayio.listings inner join stayio.photos on stayio.listings.listingId = stayio.photos.listingId where stayio.listings.listingId = 9;
+
+explain analyze select * from stayio.listings inner join stayio.photos on listings.listingId = photos.listingId where listings.listingId = 6243821;
+
+
+'explain analyze ' before query
+add secondary index
+photos sorted by listing id

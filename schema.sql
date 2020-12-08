@@ -14,7 +14,7 @@ CREATE TABLE stayio.listings (
 
 CREATE TABLE stayio.photos (
   photoId INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
-  listingId INT NOT NULL,
+  listingId INT NOT NULL ,
   -- REFERENCES listing.listingId,
   photoDescription VARCHAR (250),
   photoUrl VARCHAR(250) NOT NULL
