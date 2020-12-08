@@ -51,13 +51,13 @@ photoGenerator = () => {
   return `https://stayio.s3-us-west-1.amazonaws.com/Airbnb_images/home${randNumThousand()}.jpg`;
 };
 
-// let listingNum = 1;
-// let userNum = 1;
-// let favListNum = 1;
+let listingNum = 1;
+let userNum = 1;
+let favListNum = 1;
 
 createListing = () => {
   let listing = {
-    // listingId          : listingNum,
+    _key          : listingNum,
     listingName        : faker.lorem.words(3),
     listingDescription : faker.lorem.sentence(),
     listingLocation    : faker.address.city() + ', ' + faker.address.stateAbbr(),
@@ -65,7 +65,7 @@ createListing = () => {
     listingNumReviews  : randNumTenMil(),
     photos: randArrayOfPhotos()
   };
-  // listingNum++;
+  listingNum++;
   return listing;
 };
 
@@ -81,23 +81,23 @@ createListing = () => {
 
 createUser = () => {
   let user = {
-    // userId   : userNum,
+    _key   : userNum,
     userName : faker.random.float(1),
     listId   : randNumTenMil(),
     listName : faker.lorem.words()
     // favorites : randArrayOfListings()
   };
-  // userNum++;
+  userNum++;
   return user;
 };
 
 createFavList = () => {
   let favList = {
-    // favlistId   : favListNum,
+    _key   : favListNum,
     userId      : randNumTenMil(),
-    favlistName : faker.lorem.words()
+    favlistName : faker.lorem.word()
   };
-  // favListNum++;
+  favListNum++;
   return favList;
 };
 
@@ -152,27 +152,27 @@ const dataGen = (i, name, createFunc, cb) => {
   write();
 };
 
-dataGen(1000, 'graphListing', createListing, () => {
+dataGen(100000, 'graphListing', createListing, () => {
   writer.end();
   console.timeEnd('graphListing');
 });
 
-dataGen(10, 'graphUser', createUser, () => {
+dataGen(100, 'graphUser', createUser, () => {
   writer.end();
   console.timeEnd('graphUser');
 });
 
-dataGen(100, 'graphOwnsEdge', createOwnsEdge, () => {
+dataGen(100000, 'graphOwnsEdge', createOwnsEdge, () => {
   writer.end();
   console.timeEnd('graphOwnsEdge');
 });
 
-dataGen(100, 'graphFavList', createFavList, () => {
+dataGen(1000, 'graphFavList', createFavList, () => {
   writer.end();
   console.timeEnd('graphFavList');
 });
 
-dataGen(1000, 'graphContainsEdge', createContainsEdge, () => {
+dataGen(100000, 'graphContainsEdge', createContainsEdge, () => {
   writer.end();
   console.timeEnd('graphContainsEdge');
 });
