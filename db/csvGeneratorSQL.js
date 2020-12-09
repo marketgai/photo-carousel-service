@@ -22,7 +22,7 @@ randNumThousand = () => {
     thouIndex = randInt(10);
   }
   thouIndex += 1;
-  return milTenMil[thouIndex];
+  return milThousand[thouIndex];
 };
 
 randInt = (n) => {
@@ -39,29 +39,39 @@ randArrayOfListings = () => {
   return result;
 };
 
+randArrayOfPhotos = () => {
+  let result = [];
+  for (var i = 0; i < randInt(10); i++) {
+    result.push(photoGenerator());
+  }
+  return result;
+};
+
 photoGenerator = () => {
   return `https://stayio.s3-us-west-1.amazonaws.com/Airbnb_images/home${randNumThousand()}.jpg`;
 };
+
 
 createListing = () => {
   let listing = {
     listingName        : faker.lorem.words(2),
     listingDescription : faker.lorem.sentence(),
-    listingLocation    : `"${faker.address.city()}, ${faker.address.stateAbbr()}"`
+    listingLocation    : `${faker.address.city()}, ${faker.address.stateAbbr()}`,
     listingStars       : randNumThousand() / 200,
-    listingNumReviews  : randNumThousand()
+    listingNumReviews  : randNumThousand(),
+    photos : `{${randArrayOfPhotos()}}`
   };
   return listing;
 };
 
-createPhoto = () => {
-  let photo = {
-    listingId        : randNumTenMil(),
-    photoDescription : faker.lorem.words(2),
-    photoUrl         : photoGenerator(),
-  };
-  return photo;
-};
+// createPhoto = () => {
+//   let photo = {
+//     listingId        : randNumTenMil(),
+//     photoDescription : faker.lorem.words(2),
+//     photoUrl         : photoGenerator(),
+//   };
+//   return photo;
+// };
 
 createUser = () => {
   let user = {
@@ -123,10 +133,10 @@ dataGen(1000000, 'usersSQL', createUser, () => {
   console.timeEnd('usersSQL');
 });
 
-dataGen(100000000, 'photosSQL', createPhoto, () => {
-  writer.end();
-  console.timeEnd('photosSQL');
-});
+// dataGen(100000000, 'photosSQL', createPhoto, () => {
+//   writer.end();
+//   console.timeEnd('photosSQL');
+// });
 
 dataGen(3000000, 'userListsSQL', createUserList, () => {
   writer.end();
