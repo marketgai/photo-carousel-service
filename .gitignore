@@ -33,3 +33,5 @@ photoCarousel.pem
 #randomnumfiles
 
 db/pregenerated/
+
+db/arango/csv/
