@@ -13,7 +13,7 @@ Filter doc._key =="5"
 FOR v,e,p IN 1..1 OUTBOUND
 doc contains
 limit 1000
-RETURN e._to
+RETURN e
 
 ----returns home listing -------
 FOR home IN listings

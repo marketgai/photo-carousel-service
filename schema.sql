@@ -13,13 +13,13 @@ CREATE TABLE stayio.listings (
   photos TEXT[]
 );
 
--- CREATE TABLE stayio.photos (
---   photoId INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
---   listingId INT NOT NULL ,
---   -- REFERENCES listing.listingId,
---   photoDescription VARCHAR (250),
---   photoUrl VARCHAR(250) NOT NULL
--- );
+CREATE TABLE stayio.photos (
+  photoId INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
+  listingId INT NOT NULL ,
+  -- REFERENCES listing.listingId,
+  photoDescription VARCHAR (250),
+  photoUrl VARCHAR(250) NOT NULL
+);
 
 DROP TABLE IF EXISTS stayio.users;
 CREATE TABLE stayio.users (

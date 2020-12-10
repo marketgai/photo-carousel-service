@@ -33,3 +33,9 @@ photoCarousel.pem
 #randomnumfiles
 
 db/pregenerated/
+
+db/arango/csv/
+
+db/arango/csv/jsonListing.json
+
+/Users/marcuslee/Desktop/HR/SDC/service/db/arango/csv/jsonListing.json

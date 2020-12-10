@@ -10,7 +10,7 @@ const writer = csvWriter();
 let lastIndex = 0;
 randNumTenMil = () => {
   if (lastIndex >= 1000000) {
-    lastIndex = randInt(10);
+    lastIndex = randInt(100);
   }
   lastIndex += 1;
   return milTenMil[lastIndex];
@@ -19,7 +19,7 @@ randNumTenMil = () => {
 let thouIndex = 0;
 randNumThousand = () => {
   if (thouIndex >= 1000000) {
-    thouIndex = randInt(10);
+    thouIndex = randInt(100);
   }
   thouIndex += 1;
   return milThousand[thouIndex];
