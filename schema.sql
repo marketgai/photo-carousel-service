@@ -20,6 +20,7 @@ CREATE TABLE stayio.listings (
 --   photoDescription VARCHAR (250),
 --   photoUrl VARCHAR(250) NOT NULL
 -- );
+
 DROP TABLE IF EXISTS stayio.users;
 CREATE TABLE stayio.users (
   userId INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,

@@ -10,3 +10,9 @@ arangoimport --file "/Users/marcuslee/Desktop/HR/SDC/service/db/csv/graph/graphU
 
 
 # run with bash pathname
+
+
+#this one is for new database using JSON for listings
+
+
+arangoimport --file "/Users/marcuslee/Desktop/HR/SDC/service/db/arango/csv/jsonListing.json" --type json --collection "listings" --create-collection true --batch-size 33554432 --progress true --threads 4 --server.database "stayio";

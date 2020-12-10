@@ -69,16 +69,6 @@ createListing = () => {
   return listing;
 };
 
-// createPhoto = () => {
-//   let photo = {
-//     // photoId: randInt(100000),
-//     listingId        : randNumTenMil(),
-//     photoUrl         : photoGenerator(),
-//     photoDescription : faker.lorem.sentence()
-//   };
-//   return photo;
-// };
-
 createUser = () => {
   let user = {
     _key   : userNum,
@@ -100,15 +90,6 @@ createFavList = () => {
   favListNum++;
   return favList;
 };
-
-// createFavListings = () => {
-//   let favListing = {
-//     // favid
-//     listId    : randNumTenMil(),
-//     listingId : randNumTenMil()
-//   };
-//   return favListing;
-// };
 
 createOwnsEdge = () => {
   let ownsEdge = {
@@ -167,12 +148,12 @@ dataGen(3000000, 'graphOwnsEdge', createOwnsEdge, () => {
   console.timeEnd('graphOwnsEdge');
 });
 
-dataGen(3000000, 'graphFavList', createFavList, () => {
+dataGen(10000000, 'graphFavList', createFavList, () => {
   writer.end();
   console.timeEnd('graphFavList');
 });
 
-dataGen(10000000, 'graphContainsEdge', createContainsEdge, () => {
+dataGen(50000000, 'graphContainsEdge', createContainsEdge, () => {
   writer.end();
   console.timeEnd('graphContainsEdge');
 });

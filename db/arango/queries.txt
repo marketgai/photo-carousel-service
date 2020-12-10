@@ -1,0 +1,21 @@
+
+--------returns favlists of specified user----------
+FOR user IN user
+Filter user._key =="7"
+FOR v,e,p IN 1..1 OUTBOUND
+user owns
+limit 1000
+RETURN e._to
+
+----------returns listings on favlist
+FOR doc IN favList
+Filter doc._key =="5"
+FOR v,e,p IN 1..1 OUTBOUND
+doc contains
+limit 1000
+RETURN e._to
+
+----returns home listing -------
+FOR home IN listings
+Filter home._key =="19"
+RETURN home
